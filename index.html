@@ -248,12 +248,15 @@
 
     // DESKTOP
     id('desktop-say-hello', function () {
-        new Notification('Hi there!');
+        new Notification('Hi there!', {
+            badge: 'sword.png'
+        });
     });
 
     id('desktop-require-interaction', function () {
         new Notification('Require interaction', {
             body: 'This notification will never be auto hidden because it require your interaction',
+            badge: 'sword.png',
             requireInteraction: true
         });
     });
@@ -261,6 +264,7 @@
     id('desktop-show-notification-with-more-options', function () {
         new Notification('Extended notification', {
             body: 'This notification have additional text and icon',
+            badge: 'sword.png',
             icon: 'smile.png',
             timestamp: Date.now()
         })
@@ -269,6 +273,7 @@
     id('desktop-show-notification-with-extra-data', function () {
         var notification = new Notification('Notification with extra object data', {
             body: 'This notification have extra data',
+            badge: 'sword.png',
             icon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAApElEQVR42u3RAQ0AAAjDMO5fNCCDkC5z0HTVrisFCBABASIgQAQEiIAAAQJEQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAQECBAgAgJEQIAIyPcGFY7HnV2aPXoAAAAASUVORK5CYII=',
             data: {
                 some: 'extra-data',
@@ -284,6 +289,7 @@
         setTimeout(function () {
             new Notification('Delayed notification', {
                 body: 'This notification should be shown after 5 seconds!',
+                badge: 'sword.png',
                 icon: 'smile.png'
             });
         }, 5000);
@@ -292,6 +298,7 @@
     id('desktop-notification-events', function () {
         var notification = new Notification('Notification events', {
             body: 'Remember to open console!',
+            badge: 'sword.png',
             icon: 'smile.png'
         });
 
@@ -316,6 +323,7 @@
     id('desktop-notification-vibration-sound', function () {
         new Notification('Notification with vibration and custom sound', {
             vibrate: [400, 300, 300, 800],
+            badge: 'sword.png',
             body: 'Do you fill vibration?',
             sound: 'sound.mp3'
         });
@@ -326,7 +334,7 @@
             setTimeout(function (no) {
                 return function () {
                     new Notification('Notification No. ' + no, {
-                        badge: 'smile.png',
+                        badge: 'sword.png',
                         icon: 'smile-blue.png'
                     });
                 }
@@ -341,7 +349,7 @@
                     var group = (no % 2 == 0) ? 'A' : 'B';
                     new Notification('Tag Notification No. ' + no, {
                         tag: 'group-' + group,
-                        badge: 'smile.png',
+                        badge: 'sword.png',
                         icon: group === 'A' ? 'smile-blue.png' : 'smile-red.png'
                     });
                 }
@@ -354,7 +362,9 @@
 
     id('mobile-say-hello', function () {
         navigator.serviceWorker.ready.then(function (registration) {
-            registration.showNotification('Mobile hi there!');
+            registration.showNotification('Mobile hi there!', {
+                badge: 'sword.png'
+            });
         });
     });
 
@@ -362,6 +372,7 @@
         navigator.serviceWorker.ready.then(function (registration) {
             registration.showNotification('Mobile Require interaction', {
                 body: 'This notification will never be auto hidden because it require your interaction',
+                badge: 'sword.png',
                 requireInteraction: true
             });
         });
@@ -371,6 +382,7 @@
         navigator.serviceWorker.ready.then(function (registration) {
             registration.showNotification('Extended notification', {
                 body: 'This notification have additional text and icon',
+                badge: 'sword.png',
                 icon: 'smile.png',
                 timestamp: Date.now()
             });
@@ -378,15 +390,17 @@
     });
 
     id('mobile-show-notification-with-extra-data', function () {
-        // TODO
-        var notification = new Notification('Mobile - Notification with extra object data', {
-            body: 'This notification have extra data',
-            icon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAApElEQVR42u3RAQ0AAAjDMO5fNCCDkC5z0HTVrisFCBABASIgQAQEiIAAAQJEQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAQECBAgAgJEQIAIyPcGFY7HnV2aPXoAAAAASUVORK5CYII=',
-            data: {
-                some: 'extra-data',
-                2: true,
-                array: ["x", true, 1]
-            }
+        navigator.serviceWorker.ready.then(function (registration) {
+            registration.showNotification('Mobile - Notification with extra object data', {
+                body: 'This notification have extra data',
+                badge: 'sword.png',
+                icon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAApElEQVR42u3RAQ0AAAjDMO5fNCCDkC5z0HTVrisFCBABASIgQAQEiIAAAQJEQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAQECBAgAgJEQIAIyPcGFY7HnV2aPXoAAAAASUVORK5CYII=',
+                data: {
+                    some: 'extra-data',
+                    2: true,
+                    array: ["x", true, 1]
+                }
+            });
         });
 
         console.log('show-notification-with-more-data', notification.data);
@@ -395,15 +409,18 @@
     id('mobile-delayed-notification', function () {
         setTimeout(function () {
             navigator.serviceWorker.ready.then(function (registration) {
-                registration.showNotification('Mobile - Delayed notification', {}, 5000);
+                registration.showNotification('Mobile - Delayed notification', {
+                    badge: 'sword.png'
+                });
             });
-        });
+        }, 5000);
     });
 
     id('mobile-notification-events', function () {
         navigator.serviceWorker.ready.then(function (registration) {
             registration.showNotification('Mobile - Notification events', {
                 body: 'Remember to open console!',
+                badge: 'sword.png',
                 icon: 'smile.png',
                 onclose: function () {
                     console.log('notification-events', 'onclose');
@@ -425,6 +442,7 @@
     id('mobile-notification-vibration-sound', function () {
         navigator.serviceWorker.ready.then(function (registration) {
             registration.showNotification('Mobile - Notification with vibration and custom sound', {
+                badge: 'sword.png',
                 vibrate: [400, 300, 300, 800],
                 body: 'Do you fill vibration?',
                 sound: 'sound.mp3'
@@ -438,7 +456,7 @@
                 setTimeout(function (no) {
                     return function () {
                         registration.showNotification('Mobile - Notification No. ' + no, {
-                            badge: 'smile.png',
+                            badge: 'sword.png',
                             icon: 'smile-blue.png'
                         });
                     }
@@ -455,7 +473,7 @@
                         var group = (no % 2 == 0) ? 'A' : 'B';
                         registration.showNotification('Mobile - Tag Notification No. ' + no, {
                             tag: 'group-' + group,
-                            badge: 'smile.png',
+                            badge: 'sword.png',
                             icon: group === 'A' ? 'smile-blue.png' : 'smile-red.png'
                         });
                     }
@@ -467,11 +485,11 @@
     id('mobile-notifications-with-actions', function () {
         navigator.serviceWorker.ready.then(function (registration) {
             registration.showNotification('Mobile - Notification with call to action buttons', {
-                badge: 'smile.png',
+                badge: 'sword.png',
                 actions: [
-                    {action: 'action-1', label: '1st action', icon: 'smile-blue.png'},
-                    {action: 'action-2', label: '2nd action', icon: 'smile-red.png'},
-                    {action: 'action-3', label: '3rd action', icon: 'smile.png'}
+                    {action: 'action-1', title: '1st action', icon: 'smile-blue.png'},
+                    {action: 'action-2', title: '2nd action', icon: 'smile-red.png'},
+                    {action: 'action-3', title: '3rd action', icon: 'smile.png'}
                 ],
                 icon: 'smile.png'
             });
