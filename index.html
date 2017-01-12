@@ -12,8 +12,7 @@
     <link rel="stylesheet" href="reveal-js/black.css" id="theme">
 
     <link rel="stylesheet" href="reveal-js/zenburn.css" />
-    
-    <link rel="stylesheet" href="style.css?1" />
+    <link rel="stylesheet" href="style.css?3" />
     <script>
         navigator.serviceWorker.register('sw.js');
 
@@ -60,7 +59,7 @@ new Notification('Notification Title', {
                 <h3>Do I have permissions?</h3>
                 <p>We can easy check if user allow notification for our website by checking property:</p>
                 <pre><code class="hljs">Notification.permission;</code></pre>
-                <button type="button" id="do-i-have-permission" class="btn btn-info btn-lg">Try me!</button>
+                <button type="button" id="do-i-have-permission" class="btn-desktop">Try me!</button>
                 <p>Possible values:</p>
                 <ul class="list-unstyled">
                     <li><em>default</em> - there is no decision yet</li>
@@ -81,7 +80,7 @@ new Notification('Notification Title', {
                 <pre><code class="hljs">
 Notification.requestPermission().then((result) => { });
                 </code></pre>
-                <button type="button" id="ask-me-about-permission" class="btn btn-info btn-lg">Try me!</button>
+                <button type="button" id="ask-me-about-permission" class="btn-desktop">Try me!</button>
 
                 <h3>!important: </h3>
                 <p>Web browser will ask user about permission to show notification.
@@ -109,8 +108,8 @@ new Notification('Hi desktop user!', {
 
             </div>
             <div>
-                <button type="button" id="desktop-say-hello" class="btn btn-info">Try on desktop!</button>
-                <button type="button" id="mobile-say-hello" class="btn btn-warning">Try on mobile!</button>
+                <button type="button" id="desktop-say-hello" class="btn-desktop">Try on desktop!</button>
+                <button type="button" id="mobile-say-hello" class="btn-mobile">Try on mobile!</button>
             </div>
             <script>
                 id('desktop-say-hello', () => {
@@ -146,10 +145,10 @@ new Notification('Extended notification', {
                 </code></pre>
             </div>
             <div>
-                <button type="button" id="desktop-show-notification-with-more-options" class="btn btn-info">Try on
+                <button type="button" id="desktop-show-notification-with-more-options" class="btn-desktop">Try on
                     desktop!
                 </button>
-                <button type="button" id="mobile-show-notification-with-more-options" class="btn btn-warning">Try on
+                <button type="button" id="mobile-show-notification-with-more-options" class="btn-mobile">Try on
                     mobile!
                 </button>
             </div>
@@ -189,10 +188,10 @@ new Notification('Extended notification', {
                     tincidunt.</p>
             </div>
             <div>
-                <button type="button" id="desktop-show-notification-with-extra-data" class="btn btn-info">Try on
+                <button type="button" id="desktop-show-notification-with-extra-data" class="btn-desktop">Try on
                     desktop!
                 </button>
-                <button type="button" id="mobile-show-notification-with-extra-data" class="btn btn-warning">Try on
+                <button type="button" id="mobile-show-notification-with-extra-data" class="btn-mobile">Try on
                     mobile!
                 </button>
             </div>
@@ -211,8 +210,8 @@ new Notification('Extended notification', {
                     tincidunt.</p>
             </div>
             <div>
-                <button type="button" id="desktop-delayed-notification" class="btn btn-info">Try on desktop!</button>
-                <button type="button" id="mobile-delayed-notification" class="btn btn-warning">Try on mobile!</button>
+                <button type="button" id="desktop-delayed-notification" class="btn-desktop">Try on desktop!</button>
+                <button type="button" id="mobile-delayed-notification" class="btn-mobile">Try on mobile!</button>
             </div>
         </section>
 
@@ -229,8 +228,8 @@ new Notification('Extended notification', {
                     tincidunt.</p>
             </div>
             <div>
-                <button type="button" id="desktop-require-interaction" class="btn btn-info">Try on desktop!</button>
-                <button type="button" id="mobile-require-interaction" class="btn btn-warning">Try on mobile!</button>
+                <button type="button" id="desktop-require-interaction" class="btn-desktop">Try on desktop!</button>
+                <button type="button" id="mobile-require-interaction" class="btn-mobile">Try on mobile!</button>
             </div>
         </section>
 
@@ -247,8 +246,8 @@ new Notification('Extended notification', {
                     tincidunt.</p>
             </div>
             <div>
-                <button type="button" id="desktop-notification-events" class="btn btn-info">Try on desktop!</button>
-                <button type="button" id="mobile-notification-events" class="btn btn-warning">Try on mobile!</button>
+                <button type="button" id="desktop-notification-events" class="btn-desktop">Try on desktop!</button>
+                <button type="button" id="mobile-notification-events" class="btn-mobile">Try on mobile!</button>
             </div>
         </section>
 
@@ -265,9 +264,9 @@ new Notification('Extended notification', {
                     tincidunt.</p>
             </div>
             <div>
-                <button type="button" id="desktop-notification-vibration-sound" class="btn btn-info">Try on desktop!
+                <button type="button" id="desktop-notification-vibration-sound" class="btn-desktop">Try on desktop!
                 </button>
-                <button type="button" id="mobile-notification-vibration-sound" class="btn btn-warning">Try on mobile!
+                <button type="button" id="mobile-notification-vibration-sound" class="btn-mobile">Try on mobile!
                 </button>
             </div>
         </section>
@@ -286,9 +285,9 @@ new Notification('Extended notification', {
                     tincidunt.</p>
             </div>
             <div>
-                <button type="button" id="desktop-many-notifications-without-tag" class="btn btn-info">Try on desktop!
+                <button type="button" id="desktop-many-notifications-without-tag" class="btn-desktop">Try on desktop!
                 </button>
-                <button type="button" id="mobile-many-notifications-without-tag" class="btn btn-warning">Try on
+                <button type="button" id="mobile-many-notifications-without-tag" class="btn-mobile">Try on
                     mobile!
                 </button>
             </div>
@@ -307,9 +306,9 @@ new Notification('Extended notification', {
                     tincidunt.</p>
             </div>
             <div>
-                <button type="button" id="desktop-many-notifications-with-tag" class="btn btn-info">Try on desktop!
+                <button type="button" id="desktop-many-notifications-with-tag" class="btn-desktop">Try on desktop!
                 </button>
-                <button type="button" id="mobile-many-notifications-with-tag" class="btn btn-warning">Try on mobile!
+                <button type="button" id="mobile-many-notifications-with-tag" class="btn-mobile">Try on mobile!
                 </button>
             </div>
         </section>
@@ -327,7 +326,7 @@ new Notification('Extended notification', {
                     tincidunt.</p>
             </div>
             <div>
-                <button type="button" id="mobile-notifications-with-actions" class="btn btn-warning">Try on mobile!</button>
+                <button type="button" id="mobile-notifications-with-actions" class="btn-mobile">Try on mobile!</button>
             </div>
         </section>
     </main>
