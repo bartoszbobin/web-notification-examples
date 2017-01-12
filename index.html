@@ -1,1 +1,489 @@
-<h1>Hello!</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <title>Web Notification API showcase | Bartosz Bobin</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+</head>
+<body>
+<main class="container">
+    <header class="page-header">
+        <h1>Web Notification API showcase</h1>
+        <h3>Author Bartosz Bobin</h3>
+    </header>
+    <article>
+        <div class="clearfix form-group">
+            <div class="col-sm-8"><strong>Do I have permissions?</strong><br/>
+
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis arcu ullamcorper, imperdiet
+                    leo dignissim, sodales ipsum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
+                    posuere cubilia Curae; Nullam ac turpis ipsum. Vivamus nec eleifend ex. Etiam blandit tortor eget
+                    ante euismod interdum. Sed vitae urna a tellus ullamcorper placerat. Fusce eu tortor placerat,
+                    dapibus sem sed, laoreet elit. Suspendisse porttitor porttitor tortor, vitae condimentum nisi
+                    gravida vitae. Phasellus tempus augue ut tellus vestibulum, id tempus sapien sagittis. Nam
+                    vestibulum venenatis felis id tristique. Pellentesque eleifend rhoncus mi, congue sagittis diam
+                    pharetra sed. Vestibulum sodales purus ac pharetra dignissim. Praesent ultricies molestie
+                    tincidunt.</p>
+            </div>
+            <div class="col-sm-4">
+                <button type="button" id="do-i-have-permission" class="btn btn-info btn-block">Try me!</button>
+            </div>
+        </div>
+        <div class="clearfix form-group">
+            <div class="col-sm-8"><strong>Ask me about permissions</strong><br/>
+                <p>xxxxxxxxxxxxx</p>
+            </div>
+            <div class="col-sm-4">
+                <button type="button" id="ask-me-about-permission" class="btn btn-info btn-block">Try me!</button>
+            </div>
+        </div>
+
+        <p>&nbsp;</p>
+        <div class="clearfix form-group">
+            <div class="col-sm-8"><strong>Say Hello!</strong><br/>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis arcu ullamcorper, imperdiet
+                    leo dignissim, sodales ipsum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
+                    posuere cubilia Curae; Nullam ac turpis ipsum. Vivamus nec eleifend ex. Etiam blandit tortor eget
+                    ante euismod interdum. Sed vitae urna a tellus ullamcorper placerat. Fusce eu tortor placerat,
+                    dapibus sem sed, laoreet elit. Suspendisse porttitor porttitor tortor, vitae condimentum nisi
+                    gravida vitae. Phasellus tempus augue ut tellus vestibulum, id tempus sapien sagittis. Nam
+                    vestibulum venenatis felis id tristique. Pellentesque eleifend rhoncus mi, congue sagittis diam
+                    pharetra sed. Vestibulum sodales purus ac pharetra dignissim. Praesent ultricies molestie
+                    tincidunt.</p>
+            </div>
+            <div class="col-sm-4">
+                <button type="button" id="desktop-say-hello" class="btn btn-info">Try on desktop!</button>
+                <button type="button" id="mobile-say-hello" class="btn btn-warning">Try on mobile!</button>
+            </div>
+        </div>
+        <div class="clearfix form-group">
+            <div class="col-sm-8"><strong>Tell me more!</strong><br/>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis arcu ullamcorper, imperdiet
+                    leo dignissim, sodales ipsum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
+                    posuere cubilia Curae; Nullam ac turpis ipsum. Vivamus nec eleifend ex. Etiam blandit tortor eget
+                    ante euismod interdum. Sed vitae urna a tellus ullamcorper placerat. Fusce eu tortor placerat,
+                    dapibus sem sed, laoreet elit. Suspendisse porttitor porttitor tortor, vitae condimentum nisi
+                    gravida vitae. Phasellus tempus augue ut tellus vestibulum, id tempus sapien sagittis. Nam
+                    vestibulum venenatis felis id tristique. Pellentesque eleifend rhoncus mi, congue sagittis diam
+                    pharetra sed. Vestibulum sodales purus ac pharetra dignissim. Praesent ultricies molestie
+                    tincidunt.</p>
+            </div>
+            <div class="col-sm-4">
+                <button type="button" id="desktop-show-notification-with-more-options" class="btn btn-info">Try on
+                    desktop!
+                </button>
+                <button type="button" id="mobile-show-notification-with-more-options" class="btn btn-warning">Try on
+                    mobile!
+                </button>
+            </div>
+        </div>
+        <div class="clearfix form-group">
+            <div class="col-sm-8"><strong>With extra data and base64 icon</strong><br/>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis arcu ullamcorper, imperdiet
+                    leo dignissim, sodales ipsum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
+                    posuere cubilia Curae; Nullam ac turpis ipsum. Vivamus nec eleifend ex. Etiam blandit tortor eget
+                    ante euismod interdum. Sed vitae urna a tellus ullamcorper placerat. Fusce eu tortor placerat,
+                    dapibus sem sed, laoreet elit. Suspendisse porttitor porttitor tortor, vitae condimentum nisi
+                    gravida vitae. Phasellus tempus augue ut tellus vestibulum, id tempus sapien sagittis. Nam
+                    vestibulum venenatis felis id tristique. Pellentesque eleifend rhoncus mi, congue sagittis diam
+                    pharetra sed. Vestibulum sodales purus ac pharetra dignissim. Praesent ultricies molestie
+                    tincidunt.</p>
+            </div>
+            <div class="col-sm-4">
+                <button type="button" id="desktop-show-notification-with-extra-data" class="btn btn-info">Try on
+                    desktop!
+                </button>
+                <button type="button" id="mobile-show-notification-with-extra-data" class="btn btn-warning">Try on
+                    mobile!
+                </button>
+            </div>
+        </div>
+        <div class="clearfix form-group">
+            <div class="col-sm-8"><strong>Delay notification!</strong><br/>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis arcu ullamcorper, imperdiet
+                    leo dignissim, sodales ipsum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
+                    posuere cubilia Curae; Nullam ac turpis ipsum. Vivamus nec eleifend ex. Etiam blandit tortor eget
+                    ante euismod interdum. Sed vitae urna a tellus ullamcorper placerat. Fusce eu tortor placerat,
+                    dapibus sem sed, laoreet elit. Suspendisse porttitor porttitor tortor, vitae condimentum nisi
+                    gravida vitae. Phasellus tempus augue ut tellus vestibulum, id tempus sapien sagittis. Nam
+                    vestibulum venenatis felis id tristique. Pellentesque eleifend rhoncus mi, congue sagittis diam
+                    pharetra sed. Vestibulum sodales purus ac pharetra dignissim. Praesent ultricies molestie
+                    tincidunt.</p>
+            </div>
+            <div class="col-sm-4">
+                <button type="button" id="desktop-delayed-notification" class="btn btn-info">Try on desktop!</button>
+                <button type="button" id="mobile-delayed-notification" class="btn btn-warning">Try on mobile!</button>
+            </div>
+        </div>
+        <div class="clearfix form-group">
+            <div class="col-sm-8"><strong>Require interaction</strong><br/>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis arcu ullamcorper, imperdiet
+                    leo dignissim, sodales ipsum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
+                    posuere cubilia Curae; Nullam ac turpis ipsum. Vivamus nec eleifend ex. Etiam blandit tortor eget
+                    ante euismod interdum. Sed vitae urna a tellus ullamcorper placerat. Fusce eu tortor placerat,
+                    dapibus sem sed, laoreet elit. Suspendisse porttitor porttitor tortor, vitae condimentum nisi
+                    gravida vitae. Phasellus tempus augue ut tellus vestibulum, id tempus sapien sagittis. Nam
+                    vestibulum venenatis felis id tristique. Pellentesque eleifend rhoncus mi, congue sagittis diam
+                    pharetra sed. Vestibulum sodales purus ac pharetra dignissim. Praesent ultricies molestie
+                    tincidunt.</p>
+            </div>
+            <div class="col-sm-4">
+                <button type="button" id="desktop-require-interaction" class="btn btn-info">Try on desktop!</button>
+                <button type="button" id="mobile-require-interaction" class="btn btn-warning">Try on mobile!</button>
+            </div>
+        </div>
+        <p>&nbsp;</p>
+        <div class="clearfix form-group">
+            <div class="col-sm-8"><strong>Notification events</strong><br/>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis arcu ullamcorper, imperdiet
+                    leo dignissim, sodales ipsum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
+                    posuere cubilia Curae; Nullam ac turpis ipsum. Vivamus nec eleifend ex. Etiam blandit tortor eget
+                    ante euismod interdum. Sed vitae urna a tellus ullamcorper placerat. Fusce eu tortor placerat,
+                    dapibus sem sed, laoreet elit. Suspendisse porttitor porttitor tortor, vitae condimentum nisi
+                    gravida vitae. Phasellus tempus augue ut tellus vestibulum, id tempus sapien sagittis. Nam
+                    vestibulum venenatis felis id tristique. Pellentesque eleifend rhoncus mi, congue sagittis diam
+                    pharetra sed. Vestibulum sodales purus ac pharetra dignissim. Praesent ultricies molestie
+                    tincidunt.</p>
+            </div>
+            <div class="col-sm-4">
+                <button type="button" id="desktop-notification-events" class="btn btn-info">Try on desktop!</button>
+                <button type="button" id="mobile-notification-events" class="btn btn-warning">Try on mobile!</button>
+            </div>
+        </div>
+        <div class="clearfix form-group">
+            <div class="col-sm-8"><strong>Notification with vibration and custom sound</strong><br/>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis arcu ullamcorper, imperdiet
+                    leo dignissim, sodales ipsum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
+                    posuere cubilia Curae; Nullam ac turpis ipsum. Vivamus nec eleifend ex. Etiam blandit tortor eget
+                    ante euismod interdum. Sed vitae urna a tellus ullamcorper placerat. Fusce eu tortor placerat,
+                    dapibus sem sed, laoreet elit. Suspendisse porttitor porttitor tortor, vitae condimentum nisi
+                    gravida vitae. Phasellus tempus augue ut tellus vestibulum, id tempus sapien sagittis. Nam
+                    vestibulum venenatis felis id tristique. Pellentesque eleifend rhoncus mi, congue sagittis diam
+                    pharetra sed. Vestibulum sodales purus ac pharetra dignissim. Praesent ultricies molestie
+                    tincidunt.</p>
+            </div>
+            <div class="col-sm-4">
+                <button type="button" id="desktop-notification-vibration-sound" class="btn btn-info">Try on desktop!
+                </button>
+                <button type="button" id="mobile-notification-vibration-sound" class="btn btn-warning">Try on mobile!
+                </button>
+            </div>
+        </div>
+
+        <h3>Many notifications</h3>
+        <div class="clearfix form-group">
+            <div class="col-sm-8"><strong>without tagging</strong><br/>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis arcu ullamcorper, imperdiet
+                    leo dignissim, sodales ipsum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
+                    posuere cubilia Curae; Nullam ac turpis ipsum. Vivamus nec eleifend ex. Etiam blandit tortor eget
+                    ante euismod interdum. Sed vitae urna a tellus ullamcorper placerat. Fusce eu tortor placerat,
+                    dapibus sem sed, laoreet elit. Suspendisse porttitor porttitor tortor, vitae condimentum nisi
+                    gravida vitae. Phasellus tempus augue ut tellus vestibulum, id tempus sapien sagittis. Nam
+                    vestibulum venenatis felis id tristique. Pellentesque eleifend rhoncus mi, congue sagittis diam
+                    pharetra sed. Vestibulum sodales purus ac pharetra dignissim. Praesent ultricies molestie
+                    tincidunt.</p>
+            </div>
+            <div class="col-sm-4">
+                <button type="button" id="desktop-many-notifications-without-tag" class="btn btn-info">Try on desktop!
+                </button>
+                <button type="button" id="mobile-many-notifications-without-tag" class="btn btn-warning">Try on
+                    mobile!
+                </button>
+            </div>
+        </div>
+        <div class="clearfix form-group">
+            <div class="col-sm-8"><strong>with tagging</strong><br/>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis arcu ullamcorper, imperdiet
+                    leo dignissim, sodales ipsum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
+                    posuere cubilia Curae; Nullam ac turpis ipsum. Vivamus nec eleifend ex. Etiam blandit tortor eget
+                    ante euismod interdum. Sed vitae urna a tellus ullamcorper placerat. Fusce eu tortor placerat,
+                    dapibus sem sed, laoreet elit. Suspendisse porttitor porttitor tortor, vitae condimentum nisi
+                    gravida vitae. Phasellus tempus augue ut tellus vestibulum, id tempus sapien sagittis. Nam
+                    vestibulum venenatis felis id tristique. Pellentesque eleifend rhoncus mi, congue sagittis diam
+                    pharetra sed. Vestibulum sodales purus ac pharetra dignissim. Praesent ultricies molestie
+                    tincidunt.</p>
+            </div>
+            <div class="col-sm-4">
+                <button type="button" id="desktop-many-notifications-with-tag" class="btn btn-info">Try on desktop!
+                </button>
+                <button type="button" id="mobile-many-notifications-with-tag" class="btn btn-warning">Try on mobile!
+                </button>
+            </div>
+        </div>
+        <p>&nbsp;</p>
+        <div class="clearfix form-group">
+            <div class="col-sm-8"><strong>Custom actions</strong><br/>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis arcu ullamcorper, imperdiet
+                    leo dignissim, sodales ipsum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
+                    posuere cubilia Curae; Nullam ac turpis ipsum. Vivamus nec eleifend ex. Etiam blandit tortor eget
+                    ante euismod interdum. Sed vitae urna a tellus ullamcorper placerat. Fusce eu tortor placerat,
+                    dapibus sem sed, laoreet elit. Suspendisse porttitor porttitor tortor, vitae condimentum nisi
+                    gravida vitae. Phasellus tempus augue ut tellus vestibulum, id tempus sapien sagittis. Nam
+                    vestibulum venenatis felis id tristique. Pellentesque eleifend rhoncus mi, congue sagittis diam
+                    pharetra sed. Vestibulum sodales purus ac pharetra dignissim. Praesent ultricies molestie
+                    tincidunt.</p>
+            </div>
+            <div class="col-sm-4">
+                <button type="button" id="mobile-notifications-with-actions" class="btn btn-warning">Try on mobile!</button>
+            </div>
+        </div>
+    </article>
+</main>
+
+<script>
+    // https://groups.google.com/a/chromium.org/forum/#!topic/blink-dev/BygptYClroM
+    id('do-i-have-permission', function () {
+        window.alert(Notification.permission);
+    });
+
+    id('ask-me-about-permission', function () {
+        Notification.requestPermission().then(function (result) {
+            window.alert('Notification Request : ' + result);
+        });
+    });
+
+    // DESKTOP
+    id('desktop-say-hello', function () {
+        new Notification('Hi there!');
+    });
+
+    id('desktop-require-interaction', function () {
+        new Notification('Require interaction', {
+            body: 'This notification will never be auto hidden because it require your interaction',
+            requireInteraction: true
+        });
+    });
+
+    id('desktop-show-notification-with-more-options', function () {
+        new Notification('Extended notification', {
+            body: 'This notification have additional text and icon',
+            icon: 'smile.png',
+            timestamp: Date.now()
+        })
+    });
+
+    id('desktop-show-notification-with-extra-data', function () {
+        var notification = new Notification('Notification with extra object data', {
+            body: 'This notification have extra data',
+            icon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAApElEQVR42u3RAQ0AAAjDMO5fNCCDkC5z0HTVrisFCBABASIgQAQEiIAAAQJEQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAQECBAgAgJEQIAIyPcGFY7HnV2aPXoAAAAASUVORK5CYII=',
+            data: {
+                some: 'extra-data',
+                2: true,
+                array: ["x", true, 1]
+            }
+        });
+
+        console.log('show-notification-with-more-data', notification.data);
+    });
+
+    id('desktop-delayed-notification', function () {
+        setTimeout(function () {
+            new Notification('Delayed notification', {
+                body: 'This notification should be shown after 5 seconds!',
+                icon: 'smile.png'
+            });
+        }, 5000);
+    });
+
+    id('desktop-notification-events', function () {
+        var notification = new Notification('Notification events', {
+            body: 'Remember to open console!',
+            icon: 'smile.png'
+        });
+
+        notification.onclose = function () {
+            console.log('notification-events', 'onclose');
+        };
+
+        notification.onclick = function (event) {
+            console.log('notification-events', 'onclick');
+            event.target.close(); // because not every browser close notification after click on them
+        };
+
+        notification.onshow = function () {
+            console.log('notification-events', 'onshow');
+        };
+
+        notification.onerror = function () {
+            console.log('notification-events', 'onerror');
+        };
+    });
+
+    id('desktop-notification-vibration-sound', function () {
+        new Notification('Notification with vibration and custom sound', {
+            vibrate: [400, 300, 300, 800],
+            body: 'Do you fill vibration?',
+            sound: 'sound.mp3'
+        });
+    });
+
+    id('desktop-many-notifications-without-tag', function () {
+        for (var i = 1; i < 12; i++) {
+            setTimeout(function (no) {
+                return function () {
+                    new Notification('Notification No. ' + no, {
+                        badge: 'smile.png',
+                        icon: 'smile-blue.png'
+                    });
+                }
+            }(i), 1000 * i);
+        }
+    });
+
+    id('desktop-many-notifications-with-tag', function () {
+        for (var i = 1; i < 30; i++) {
+            setTimeout(function (no) {
+                return function () {
+                    var group = (no % 2 == 0) ? 'A' : 'B';
+                    new Notification('Tag Notification No. ' + no, {
+                        tag: 'group-' + group,
+                        badge: 'smile.png',
+                        icon: group === 'A' ? 'smile-blue.png' : 'smile-red.png'
+                    });
+                }
+            }(i), 1000 * i);
+        }
+    });
+
+    // MOBILE
+    navigator.serviceWorker.register('sw.js');
+
+    id('mobile-say-hello', function () {
+        navigator.serviceWorker.ready.then(function (registration) {
+            registration.showNotification('Mobile hi there!');
+        });
+    });
+
+    id('mobile-require-interaction', function () {
+        navigator.serviceWorker.ready.then(function (registration) {
+            registration.showNotification('Mobile Require interaction', {
+                body: 'This notification will never be auto hidden because it require your interaction',
+                requireInteraction: true
+            });
+        });
+    });
+
+    id('mobile-show-notification-with-more-options', function () {
+        navigator.serviceWorker.ready.then(function (registration) {
+            registration.showNotification('Extended notification', {
+                body: 'This notification have additional text and icon',
+                icon: 'smile.png',
+                timestamp: Date.now()
+            });
+        });
+    });
+
+    id('mobile-show-notification-with-extra-data', function () {
+        // TODO
+        var notification = new Notification('Mobile - Notification with extra object data', {
+            body: 'This notification have extra data',
+            icon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAApElEQVR42u3RAQ0AAAjDMO5fNCCDkC5z0HTVrisFCBABASIgQAQEiIAAAQJEQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAQECBAgAgJEQIAIyPcGFY7HnV2aPXoAAAAASUVORK5CYII=',
+            data: {
+                some: 'extra-data',
+                2: true,
+                array: ["x", true, 1]
+            }
+        });
+
+        console.log('show-notification-with-more-data', notification.data);
+    });
+
+    id('mobile-delayed-notification', function () {
+        setTimeout(function () {
+            navigator.serviceWorker.ready.then(function (registration) {
+                registration.showNotification('Mobile - Delayed notification', {}, 5000);
+            });
+        });
+    });
+
+    id('mobile-notification-events', function () {
+        navigator.serviceWorker.ready.then(function (registration) {
+            registration.showNotification('Mobile - Notification events', {
+                body: 'Remember to open console!',
+                icon: 'smile.png',
+                onclose: function () {
+                    console.log('notification-events', 'onclose');
+                },
+                onclick: function (event) {
+                    console.log('notification-events', 'onclick');
+                    event.target.close(); // because not every browser close notification after click on them
+                },
+                onshow: function () {
+                    console.log('notification-events', 'onshow');
+                },
+                onerror: function () {
+                    console.log('notification-events', 'onerror');
+                }
+            });
+        });
+    });
+
+    id('mobile-notification-vibration-sound', function () {
+        navigator.serviceWorker.ready.then(function (registration) {
+            registration.showNotification('Mobile - Notification with vibration and custom sound', {
+                vibrate: [400, 300, 300, 800],
+                body: 'Do you fill vibration?',
+                sound: 'sound.mp3'
+            });
+        });
+    });
+
+    id('mobile-many-notifications-without-tag', function () {
+        navigator.serviceWorker.ready.then(function (registration) {
+            for (var i = 1; i < 12; i++) {
+                setTimeout(function (no) {
+                    return function () {
+                        registration.showNotification('Mobile - Notification No. ' + no, {
+                            badge: 'smile.png',
+                            icon: 'smile-blue.png'
+                        });
+                    }
+                }(i), 1000 * i);
+            }
+        });
+    });
+
+    id('mobile-many-notifications-with-tag', function () {
+        navigator.serviceWorker.ready.then(function (registration) {
+            for (var i = 1; i < 30; i++) {
+                setTimeout(function (no) {
+                    return function () {
+                        var group = (no % 2 == 0) ? 'A' : 'B';
+                        registration.showNotification('Mobile - Tag Notification No. ' + no, {
+                            tag: 'group-' + group,
+                            badge: 'smile.png',
+                            icon: group === 'A' ? 'smile-blue.png' : 'smile-red.png'
+                        });
+                    }
+                }(i), 1000 * i);
+            }
+        });
+    });
+
+    id('mobile-notifications-with-actions', function () {
+        navigator.serviceWorker.ready.then(function (registration) {
+            registration.showNotification('Mobile - Notification with call to action buttons', {
+                badge: 'smile.png',
+                actions: [
+                    {action: 'action-1', label: '1st action', icon: 'smile-blue.png'},
+                    {action: 'action-2', label: '2nd action', icon: 'smile-red.png'},
+                    {action: 'action-3', label: '3rd action', icon: 'smile.png'}
+                ],
+                icon: 'smile.png'
+            });
+        });
+    });
+
+
+    function id(elementId, clickCallback) {
+        return window.document.getElementById(elementId).addEventListener('click', clickCallback);
+    }
+    ;
+</script>
+
+</body>
+</html>
