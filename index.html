@@ -8,10 +8,10 @@
     <title>Web Notification API showcase | Bartosz Bobin</title>
 
 
-    <link rel="stylesheet" href="http://lab.hakim.se/reveal-js/css/reveal.css">
-    <link rel="stylesheet" href="http://lab.hakim.se/reveal-js/css/theme/black.css" id="theme">
+    <link rel="stylesheet" href="reveal-js/reveal.css">
+    <link rel="stylesheet" href="reveal-js/black.css" id="theme">
     <!-- Code syntax highlighting -->
-    <link rel="stylesheet" href="http://lab.hakim.se/reveal-js/lib/css/zenburn.css">
+    <link rel="stylesheet" href="reveal-js/zenburn.css">
     <style>
         .btn {
             display: inline-block;
@@ -788,8 +788,8 @@ new Notification('Extended notification', {
         </section>
     </main>
 
-<script src="http://lab.hakim.se/reveal-js/lib/js/head.min.js"></script>
-<script src="http://lab.hakim.se/reveal-js/js/reveal.js"></script>
+<script src="reveal-js/head.min.js"></script>
+<script src="reveal-js/reveal.min.js"></script>
 <script>
 
     // Full list of configuration options available at:
@@ -802,8 +802,8 @@ new Notification('Extended notification', {
 
         transition: 'zoom', // none/fade/slide/convex/concave/zoom,
         dependencies: [
-            { src: 'http://lab.hakim.se/reveal-js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-            { src: 'http://lab.hakim.se/reveal-js/plugin/zoom-js/zoom.js', async: true }
+            { src: 'reveal-js/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+            { src: 'reveal-js/zoom.js', async: true }
         ]
     });
 
