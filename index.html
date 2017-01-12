@@ -46,10 +46,11 @@
         </script>
     </section>
 
-    <section>
+    <section class="stack">
+        <section>
             <h3>Browser support</h3>
             <p>Notification API is available in</p>
-            <table  >
+            <table>
                 <thead>
                     <tr>
                         <th></th>
@@ -86,23 +87,42 @@
                 </tbody>
             </table>
         </section>
+        <section>
+            <img src="screenshots/desktop-windows-edge-firefox-chrome-notifications.png" alt="" />
+        </section>
+        <section>
+            <img src="screenshots/mobile-android-firefox.png" alt="" />
+        </section>
+        <section>
+            <img src="screenshots/mobile-android-chrome-1.png" alt="" />
+        </section>
+        <section>
+            <img src="screenshots/mobile-android-chrome-actions.png" alt="" />
+        </section>
+    </section>
 
-    <section>
-        <h3>How to use it?</h3>
-        <p>with Notification object</p>
-        <pre><code class="hljs">new Notification('Notification Title', options);</code></pre>
-        <small><p>* Doesn't work on mobile Chrome</p></small>
+    <section class="stack">
+        <section>
+            <h3>How to use it?</h3>
+            <p>with Notification object</p>
+            <pre><code class="hljs">new Notification('Notification Title', options);</code></pre>
+            <small><p>* Doesn't work on mobile Chrome</p></small>
 
-        <p>with Webworkers</p>
-        <pre><code class="hljs">navigator.serviceWorker.register('sw.js', options);
+            <p>with Webworkers</p>
+            <pre><code class="hljs">navigator.serviceWorker.register('sw.js', options);
 
-navigator.serviceWorker.ready.then((registration) => {
-    registration.showNotification('Notification Title');
-});</code></pre>
-        <small>
-            <p>* Doesn't work on Edge</p>
-            <p>** Works only over localhost or HTTPS</p>
-        </small>
+    navigator.serviceWorker.ready.then((registration) => {
+        registration.showNotification('Notification Title');
+    });</code></pre>
+            <small>
+                <p>* Doesn't work on Edge</p>
+                <p>** Works only over localhost or HTTPS</p>
+            </small>
+        </section>
+
+        <section>
+            <img src="screenshots/mobile-android-chrome-notification-construtor-error.png" alt="" />
+        </section>
     </section>
 
 
