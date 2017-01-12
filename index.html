@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="reveal-js/black.css" id="theme">
 
     <link rel="stylesheet" href="reveal-js/zenburn.css" />
-    <link rel="stylesheet" href="style.css?3" />
+    <link rel="stylesheet" href="style.css" />
     <script>
         navigator.serviceWorker.register('sw.js');
 
@@ -34,14 +34,10 @@
 <pre><code class="hljs">
 new Notification('Notification Title', {
                   body: 'This notification have additional text and icon',
-                 badge: 'sword.png',
                   icon: 'smile.png',
-             timestamp: Date.now(),
                   data: {},
     requireInteraction: true,
                vibrate: [400, 300, 300, 800],
-                 badge: 'sword.png',
-                  body: 'Do you fill vibration?',
                    tag: 'group-A',
                  sound: 'sound.mp3'
 });
@@ -98,67 +94,46 @@ Notification.requestPermission().then((result) => { });
         <section>
             <div class="col-sm-8"><h3>Say Hello!</h3>
                 <p>Let's try simple notification</p>
-                <pre><code class="hljs">
-new Notification('Hi desktop user!', {
-    badge: 'sword.png',
-    icon: 'smile.png',
-    image: 'smile-blue.png'
-});
-                </code></pre>
+                <pre><code class="hljs">new Notification('Hi desktop user!');</code></pre>
 
             </div>
             <div>
-                <button type="button" id="desktop-say-hello" class="btn-desktop">Try on desktop!</button>
-                <button type="button" id="mobile-say-hello" class="btn-mobile">Try on mobile!</button>
+                <button type="button" id="desktop-say-hello" class="btn-desktop">Try with Notification</button>
+                <button type="button" id="mobile-say-hello" class="btn-mobile">Try with Webworkers!</button>
             </div>
             <script>
                 id('desktop-say-hello', () => {
-                    new Notification('Hi desktop user!', {
-                        badge: 'sword.png',
-                        icon: 'smile.png',
-                        image: 'smile-blue.png'
-                    });
+                    new Notification('Hi desktop user!');
                 });
 
                 id('mobile-say-hello', () => {
                     navigator.serviceWorker.ready.then(function (registration) {
-                        registration.showNotification('Hi mobile user!', {
-                            badge: 'sword.png',
-                            icon: 'smile.png',
-                            image: 'smile-blue.png'
-                        });
+                        registration.showNotification('Hi mobile user!');
                     });
                 });
             </script>
         </section>
 
         <section>
-            <div class="col-sm-8"><h3>More extended example!</h3>
+            <h3>More complex example!</h3>
                 <p>Let's add body text and icon to our notification...</p>
                 <pre><code class="hljs">
 new Notification('Extended notification', {
     body: 'This notification have additional text and icon',
-    badge: 'sword.png',
-    icon: 'smile.png',
-    timestamp: Date.now()
+    icon: 'smile.png'
 });
                 </code></pre>
-            </div>
             <div>
-                <button type="button" id="desktop-show-notification-with-more-options" class="btn-desktop">Try on
-                    desktop!
-                </button>
-                <button type="button" id="mobile-show-notification-with-more-options" class="btn-mobile">Try on
-                    mobile!
-                </button>
+                <button type="button" id="desktop-show-notification-with-more-options" class="btn-desktop">Try with Notification</button>
+                <button type="button" id="mobile-show-notification-with-more-options" class="btn-mobile">Try with Webworkers!</button>
             </div>
             <script>
                 id('desktop-show-notification-with-more-options', () => {
                     new Notification('Extended notification', {
                         body: 'This notification have additional text and icon',
-                        badge: 'sword.png',
                         icon: 'smile.png',
-                        timestamp: Date.now()
+                        image: 'smile-blue.png',
+                        silent: false
                     });
                 });
 
@@ -166,9 +141,9 @@ new Notification('Extended notification', {
                     navigator.serviceWorker.ready.then(function (registration) {
                         registration.showNotification('Extended notification', {
                             body: 'This notification have additional text and icon',
-                            badge: 'sword.png',
                             icon: 'smile.png',
-                            timestamp: Date.now()
+                            image: 'smile-blue.png',
+                            silent: false
                         });
                     });
                 });
@@ -176,167 +151,397 @@ new Notification('Extended notification', {
         </section>
 
         <section>
-            <div class="col-sm-8"><h3>With extra data and base64 icon</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis arcu ullamcorper, imperdiet
-                    leo dignissim, sodales ipsum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
-                    posuere cubilia Curae; Nullam ac turpis ipsum. Vivamus nec eleifend ex. Etiam blandit tortor eget
-                    ante euismod interdum. Sed vitae urna a tellus ullamcorper placerat. Fusce eu tortor placerat,
-                    dapibus sem sed, laoreet elit. Suspendisse porttitor porttitor tortor, vitae condimentum nisi
-                    gravida vitae. Phasellus tempus augue ut tellus vestibulum, id tempus sapien sagittis. Nam
-                    vestibulum venenatis felis id tristique. Pellentesque eleifend rhoncus mi, congue sagittis diam
-                    pharetra sed. Vestibulum sodales purus ac pharetra dignissim. Praesent ultricies molestie
-                    tincidunt.</p>
-            </div>
-            <div>
-                <button type="button" id="desktop-show-notification-with-extra-data" class="btn-desktop">Try on
-                    desktop!
-                </button>
-                <button type="button" id="mobile-show-notification-with-extra-data" class="btn-mobile">Try on
-                    mobile!
-                </button>
-            </div>
+            <h3>More about icons</h3>
+                <p>We can use PNG, JPG and GIF as an images.</p>
+                <p>What about BASE 64?</p>
+                <div>
+                    <button type="button" id="desktop-icon-base64" class="btn-desktop">Try with Notification</button>
+                    <button type="button" id="mobile-icon-base64" class="btn-mobile">Try with Webworkers!</button>
+                </div>
+
+                <p>What about SVG?</p>
+                <div>
+                    <button type="button" id="desktop-icon-svg" class="btn-desktop">Try with Notification</button>
+                    <button type="button" id="mobile-icon-svg" class="btn-mobile">Try with Webworkers!</button>
+                </div>
+            <script>
+                (() => {
+                    const options = {
+                        body: 'You should see red color as an image',
+                        icon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAApElEQVR42u3RAQ0AAAjDMO5fNCCDkC5z0HTVrisFCBABASIgQAQEiIAAAQJEQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAQECBAgAgJEQIAIyPcGFY7HnV2aPXoAAAAASUVORK5CYII=',
+                        silent: false
+                    };
+
+                    id('desktop-icon-base64', () => {
+                        new Notification('Desktop Base64 image', options);
+                    });
+
+                    id('mobile-icon-base64', () => {
+                        navigator.serviceWorker.ready.then((registration) => {
+                            registration.showNotification('Mobile Base64 image', options);
+                        });
+                    });
+                })();
+
+                (() => {
+                    const options = {
+                        body: 'You should see kiwi as an image',
+                        icon: 'kiwi.svg',
+                        silent: false
+                    };
+
+                    id('desktop-icon-svg', () => {
+                        new Notification('Desktop SVG image', options);
+                    });
+
+                    id('mobile-icon-svg', () => {
+                        navigator.serviceWorker.ready.then((registration) => {
+                            registration.showNotification('Mobile SVG image', options);
+                        });
+                    });
+                })();
+            </script>
+            </section>
+
+            <!-- EXTRA DATA -->
+            <section>
+                <h3>How to pass extra data with Notification?</h3>
+                <pre><code class="hljs">new Notification('Notification with extra object data', {
+    body: 'This notification have extra data',
+    data: {
+        some: 'extra-data',
+        2: true,
+        array: ["x", true, 1]
+    }
+});</code></pre>
+                <div>
+                    <button type="button" id="desktop-show-notification-with-extra-data" class="btn-desktop">Try with Notification</button>
+                    <button type="button" id="mobile-show-notification-with-extra-data" class="btn-mobile">Try with Webworkers!</button>
+                </div>
+            <script>
+                (() => {
+                    const options = {
+                        body: 'This notification have extra data',
+                        data: {
+                            some: 'extra-data',
+                            2: true,
+                            array: ["x", true, 1]
+                        },
+                        click: () => console.log(111)
+                    };
+
+                    id('desktop-show-notification-with-extra-data', () => {
+                        const notification = new Notification('Notification with extra object data', options);
+
+                        console.log('show-notification-with-more-data', notification.data);
+                    });
+
+                    id('mobile-show-notification-with-extra-data', () => {
+                        navigator.serviceWorker.register('sw-onnotificationclick.js').then((registration) => {
+                            registration.showNotification('Mobile - Notification with extra object data', options)
+                                .then(function() {
+                                    console.log('NotificationEvent', arguments);
+                                });
+
+                            setTimeout(() => {
+                                registration.getNotifications()
+                                    .then(notifications => console.log('getNotifications()', notifications));
+                            }, 2000);
+                        });
+                    });
+                })();
+            </script>
+        </section>
+        <section>
+            <p>ok ... but how to deal with this extra data?</p>
+            <pre><code class="hljs">const notification = new Notification(...);
+
+console.log(notification.data);</code></pre>
+
+            <p>and inside webworkers</p>
+            <pre><code class="hljs">self.onnotificationclick = (event) => {
+    console.log(event.notification.data);
+};</code></pre>
         </section>
 
         <section>
-            <div class="col-sm-8"><h3>Delay notification!</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis arcu ullamcorper, imperdiet
-                    leo dignissim, sodales ipsum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
-                    posuere cubilia Curae; Nullam ac turpis ipsum. Vivamus nec eleifend ex. Etiam blandit tortor eget
-                    ante euismod interdum. Sed vitae urna a tellus ullamcorper placerat. Fusce eu tortor placerat,
-                    dapibus sem sed, laoreet elit. Suspendisse porttitor porttitor tortor, vitae condimentum nisi
-                    gravida vitae. Phasellus tempus augue ut tellus vestibulum, id tempus sapien sagittis. Nam
-                    vestibulum venenatis felis id tristique. Pellentesque eleifend rhoncus mi, congue sagittis diam
-                    pharetra sed. Vestibulum sodales purus ac pharetra dignissim. Praesent ultricies molestie
-                    tincidunt.</p>
+            <div class="col-sm-8"><h3>How it behave when webbrowser is not on top?</h3>
+                <pre><code class="hljs">setTimeout(() => {
+    new Notification('Delayed notification', options);
+}, 5000);</code></pre>
+                <p>Please minimalize your browser or make another program active.</p>
+                <p>Notification will appear after 5 secs</p>
             </div>
             <div>
-                <button type="button" id="desktop-delayed-notification" class="btn-desktop">Try on desktop!</button>
-                <button type="button" id="mobile-delayed-notification" class="btn-mobile">Try on mobile!</button>
+                <button type="button" id="desktop-delayed-notification" class="btn-desktop">Try with Notification</button>
+                <button type="button" id="mobile-delayed-notification" class="btn-mobile">Try with Webworkers!</button>
             </div>
+            <script>
+                (() => {
+                    const options = {
+                        body: 'This notification should be shown after 5 seconds!',
+                        icon: 'smile.png'
+                    };
+
+                    id('desktop-delayed-notification', () => {
+                        setTimeout(() => {
+                            new Notification('Desktop - delayed notification', options);
+                        }, 5000);
+                    });
+
+                    id('mobile-delayed-notification', () => {
+                        setTimeout(() => {
+                            navigator.serviceWorker.ready.then((registration) => {
+                                registration.showNotification('Mobile - delayed notification', options);
+                            });
+                        }, 5000);
+                    });
+                })();
+            </script>
         </section>
 
         <section>
-            <div class="col-sm-8"><h3>Require interaction</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis arcu ullamcorper, imperdiet
-                    leo dignissim, sodales ipsum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
-                    posuere cubilia Curae; Nullam ac turpis ipsum. Vivamus nec eleifend ex. Etiam blandit tortor eget
-                    ante euismod interdum. Sed vitae urna a tellus ullamcorper placerat. Fusce eu tortor placerat,
-                    dapibus sem sed, laoreet elit. Suspendisse porttitor porttitor tortor, vitae condimentum nisi
-                    gravida vitae. Phasellus tempus augue ut tellus vestibulum, id tempus sapien sagittis. Nam
-                    vestibulum venenatis felis id tristique. Pellentesque eleifend rhoncus mi, congue sagittis diam
-                    pharetra sed. Vestibulum sodales purus ac pharetra dignissim. Praesent ultricies molestie
-                    tincidunt.</p>
+            <div class="col-sm-8"><h3>Require interaction (desktop)</h3>
+                <p>Sometimes we really want to notify user about something important and we don't want to hide our notification without user interaction ...</p>
+                <pre><code class="hljs">new Notification('Desktop - require interaction', {
+    requireInteraction: true
+);</code></pre>
             </div>
             <div>
-                <button type="button" id="desktop-require-interaction" class="btn-desktop">Try on desktop!</button>
-                <button type="button" id="mobile-require-interaction" class="btn-mobile">Try on mobile!</button>
+                <button type="button" id="desktop-require-interaction" class="btn-desktop">Try with Notification</button>
+                <button type="button" id="mobile-require-interaction" class="btn-mobile">Try with Webworkers!</button>
             </div>
+            <script>
+                (() => {
+                    const options = {
+                        body: 'This notification will not be hidden because it require your interaction',
+                        requireInteraction: true
+                    };
+
+                    id('desktop-require-interaction', () => {
+                        new Notification('Desktop - require interaction', options);
+                    });
+
+                    id('mobile-require-interaction', () => {
+                        navigator.serviceWorker.ready.then(function (registration) {
+                            registration.showNotification('Mobile - require interaction', options);
+                        });
+                    });
+                })();
+            </script>
         </section>
 
         <section>
-            <div class="col-sm-8"><h3>Notification events</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis arcu ullamcorper, imperdiet
-                    leo dignissim, sodales ipsum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
-                    posuere cubilia Curae; Nullam ac turpis ipsum. Vivamus nec eleifend ex. Etiam blandit tortor eget
-                    ante euismod interdum. Sed vitae urna a tellus ullamcorper placerat. Fusce eu tortor placerat,
-                    dapibus sem sed, laoreet elit. Suspendisse porttitor porttitor tortor, vitae condimentum nisi
-                    gravida vitae. Phasellus tempus augue ut tellus vestibulum, id tempus sapien sagittis. Nam
-                    vestibulum venenatis felis id tristique. Pellentesque eleifend rhoncus mi, congue sagittis diam
-                    pharetra sed. Vestibulum sodales purus ac pharetra dignissim. Praesent ultricies molestie
-                    tincidunt.</p>
-            </div>
+            <h3>Notification click event</h3>
+            <pre><code class="hljs">const notification = new Notification('Notification events');
+
+notification.onclick = function (event) {
+  // do something ...
+};</code></pre>
+
+            <p>and inside webworkers</p>
+            <pre><code class="hljs">self.onnotificationclick = (event) => {
+    console.log(event.notification);
+};</code></pre>
             <div>
-                <button type="button" id="desktop-notification-events" class="btn-desktop">Try on desktop!</button>
-                <button type="button" id="mobile-notification-events" class="btn-mobile">Try on mobile!</button>
+                <button type="button" id="desktop-notification-events" class="btn-desktop">Try with Notification</button>
+                <button type="button" id="mobile-notification-events" class="btn-mobile">Try with Webworkers!</button>
             </div>
+            <script>
+                (() => {
+                    const options = {
+                        body: 'Remember to open console and see result!',
+                        icon: 'smile.png'
+                    };
+
+                    id('desktop-notification-events', () => {
+                        const notification = new Notification('Desktop - Notification events', options);
+
+                        notification.onclick = function (event) {
+                            console.log('notification-events', 'Desktop onclick');
+                            event.target.close(); // because not every browser close notification after click on them
+                        };
+                    });
+
+                    id('mobile-notification-events', () => {
+                        navigator.serviceWorker.register('sw-onnotificationclick.js').then((registration) => {
+                            registration.showNotification('Mobile - Notification events', options);
+                        });
+                    });
+                })();
+            </script>
         </section>
+
+
 
         <section>
             <div class="col-sm-8"><h3>Notification with vibration and custom sound</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis arcu ullamcorper, imperdiet
-                    leo dignissim, sodales ipsum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
-                    posuere cubilia Curae; Nullam ac turpis ipsum. Vivamus nec eleifend ex. Etiam blandit tortor eget
-                    ante euismod interdum. Sed vitae urna a tellus ullamcorper placerat. Fusce eu tortor placerat,
-                    dapibus sem sed, laoreet elit. Suspendisse porttitor porttitor tortor, vitae condimentum nisi
-                    gravida vitae. Phasellus tempus augue ut tellus vestibulum, id tempus sapien sagittis. Nam
-                    vestibulum venenatis felis id tristique. Pellentesque eleifend rhoncus mi, congue sagittis diam
-                    pharetra sed. Vestibulum sodales purus ac pharetra dignissim. Praesent ultricies molestie
-                    tincidunt.</p>
+                <p>We also can use vibration and custom sound for our notification</p>
+                <pre><code class="hljs">new Notification('Notification with vibration and custom sound', {
+    vibrate: [400, 300, 300, 800],
+    sound: 'sound.mp3',
+    silent: false
+});</code></pre>
+                <p><small>[400, 300, 300, 800] - means: 400ms vibration, 300ms pause, 300ms vibration and 800ms pause</small></p>
             </div>
             <div>
-                <button type="button" id="desktop-notification-vibration-sound" class="btn-desktop">Try on desktop!
-                </button>
-                <button type="button" id="mobile-notification-vibration-sound" class="btn-mobile">Try on mobile!
-                </button>
+                <button type="button" id="desktop-notification-vibration-sound" class="btn-desktop">Try with Notification</button>
+                <button type="button" id="mobile-notification-vibration-sound" class="btn-mobile">Try with Webworkers!</button>
             </div>
+            <script>
+                (() => {
+                    const options = {
+                        body: 'Did you fill vibration? What about sound?',
+                        vibrate: [400, 300, 300, 800],
+                        sound: 'sound.mp3',
+                        silent: false
+                    };
+
+                    id('desktop-notification-vibration-sound', () => {
+                        new Notification('Notification with vibration and custom sound', options);
+                    });
+
+                    id('mobile-notification-vibration-sound', () => {
+                        navigator.serviceWorker.ready.then((registration) => {
+                            registration.showNotification('Mobile - Notification with vibration and custom sound', options);
+                        });
+                    });
+                })();
+            </script>
         </section>
 
         <section>
-            <h3>Many notifications</h3>
-            <div class="col-sm-8"><h3>without tagging</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis arcu ullamcorper, imperdiet
-                    leo dignissim, sodales ipsum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
-                    posuere cubilia Curae; Nullam ac turpis ipsum. Vivamus nec eleifend ex. Etiam blandit tortor eget
-                    ante euismod interdum. Sed vitae urna a tellus ullamcorper placerat. Fusce eu tortor placerat,
-                    dapibus sem sed, laoreet elit. Suspendisse porttitor porttitor tortor, vitae condimentum nisi
-                    gravida vitae. Phasellus tempus augue ut tellus vestibulum, id tempus sapien sagittis. Nam
-                    vestibulum venenatis felis id tristique. Pellentesque eleifend rhoncus mi, congue sagittis diam
-                    pharetra sed. Vestibulum sodales purus ac pharetra dignissim. Praesent ultricies molestie
-                    tincidunt.</p>
-            </div>
+            <h3>Many notifications - too many ...</h3>
+            <p>Let's imagine that user received 12 messages and every time we want to notify him ... </p>
+            <p>&nbsp;</p>
+            <p><small>You will get 12 notifications with 1s delay</small></p>
+
             <div>
-                <button type="button" id="desktop-many-notifications-without-tag" class="btn-desktop">Try on desktop!
-                </button>
-                <button type="button" id="mobile-many-notifications-without-tag" class="btn-mobile">Try on
-                    mobile!
-                </button>
+                <button type="button" id="desktop-many-notifications-without-tag" class="btn-desktop">Try with Notification</button>
+                <button type="button" id="mobile-many-notifications-without-tag" class="btn-mobile">Try with Webworkers!</button>
             </div>
+            <script>
+                (() => {
+                    const options = {
+                        icon: 'smile-blue.png'
+                    };
+
+                    id('desktop-many-notifications-without-tag', () => {
+                        for (let i = 1; i < 12; i++) {
+                            setTimeout(function(no) {
+                                return () => {
+                                    new Notification('Notification No. ' + no, options);
+                                }
+                            }(i), 1000 * i);
+                        }
+                    });
+                    id('mobile-many-notifications-without-tag', () => {
+                        navigator.serviceWorker.ready.then((registration) => {
+                            for (let i = 1; i < 12; i++) {
+                                setTimeout(function(no) {
+                                    return () => {
+                                        registration.showNotification('Mobile - Notification No. ' + no, options);
+                                    }
+                                }(i), 1000 * i);
+                            }
+                        });
+                    });
+                })();
+            </script>
         </section>
 
+
         <section>
-            <div class="col-sm-8"><h3>with tagging</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis arcu ullamcorper, imperdiet
-                    leo dignissim, sodales ipsum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
-                    posuere cubilia Curae; Nullam ac turpis ipsum. Vivamus nec eleifend ex. Etiam blandit tortor eget
-                    ante euismod interdum. Sed vitae urna a tellus ullamcorper placerat. Fusce eu tortor placerat,
-                    dapibus sem sed, laoreet elit. Suspendisse porttitor porttitor tortor, vitae condimentum nisi
-                    gravida vitae. Phasellus tempus augue ut tellus vestibulum, id tempus sapien sagittis. Nam
-                    vestibulum venenatis felis id tristique. Pellentesque eleifend rhoncus mi, congue sagittis diam
-                    pharetra sed. Vestibulum sodales purus ac pharetra dignissim. Praesent ultricies molestie
-                    tincidunt.</p>
-            </div>
+            <h3>Group notifications by tagging</h3>
+            <p>We can easy replace previous notification by giving them tag</p>
+            <pre><code class="hljs">new Notification('Tagged Notification', {
+    tag: 'private-message',
+    renotify: true
+});</code></pre>
+            <p>&nbsp;</p>
+            <p><small>You will get 20 notifications with 1s delay.</small></p>
+
             <div>
-                <button type="button" id="desktop-many-notifications-with-tag" class="btn-desktop">Try on desktop!
-                </button>
-                <button type="button" id="mobile-many-notifications-with-tag" class="btn-mobile">Try on mobile!
-                </button>
+                <button type="button" id="desktop-many-notifications-with-tag" class="btn-desktop">Try with Notification</button>
+                <button type="button" id="mobile-many-notifications-with-tag" class="btn-mobile">Try with Webworkers!</button>
             </div>
+            <script>
+                (() => {
+                    const getOptions = (no) => {
+                        const group = (no % 2 == 0) ? 'A' : 'B';
+
+                        return {
+                            tag: 'group-' + group,
+                            renotify: true,
+                            icon: group === 'A' ? 'smile-blue.png' : 'smile-red.png'
+                        };
+                    };
+
+                    id('desktop-many-notifications-with-tag', () => {
+                        for (let i = 1; i <= 20; i++) {
+                            setTimeout(function (no) {
+                                return () => {
+                                    new Notification('Desktop - Tag Notification No. ' + no, getOptions(no));
+                                }
+                            }(i), 1000 * i);
+                        }
+                    });
+                    id('mobile-many-notifications-with-tag', () => {
+                        navigator.serviceWorker.ready.then(function (registration) {
+                            for (let  i = 1; i <= 20; i++) {
+                                setTimeout(function (no) {
+                                    return () => {
+                                        registration.showNotification('Mobile - Tag Notification No. ' + no, getOptions(no));
+                                    }
+                                }(i), 1000 * i);
+                            }
+                        });
+                    });
+                })();
+            </script>
         </section>
+
+
 
         <section>
             <div class="col-sm-8"><h3>Custom actions</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis arcu ullamcorper, imperdiet
-                    leo dignissim, sodales ipsum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
-                    posuere cubilia Curae; Nullam ac turpis ipsum. Vivamus nec eleifend ex. Etiam blandit tortor eget
-                    ante euismod interdum. Sed vitae urna a tellus ullamcorper placerat. Fusce eu tortor placerat,
-                    dapibus sem sed, laoreet elit. Suspendisse porttitor porttitor tortor, vitae condimentum nisi
-                    gravida vitae. Phasellus tempus augue ut tellus vestibulum, id tempus sapien sagittis. Nam
-                    vestibulum venenatis felis id tristique. Pellentesque eleifend rhoncus mi, congue sagittis diam
-                    pharetra sed. Vestibulum sodales purus ac pharetra dignissim. Praesent ultricies molestie
-                    tincidunt.</p>
+                <p>We can also allow user to do something more than only clicking on whole notification, we can introduce buttons/actions with icon and do appropriate action</p>
             </div>
+
+            <pre><code class="hljs">registration.showNotification('Notification with actions', {
+    actions: [
+        {action: 'action-1', title: '1st action', icon: 'smile-blue.png'},
+        {action: 'action-2', title: '2nd action', icon: 'smile-red.png'}
+    ]
+});</code></pre>
+
             <div>
-                <button type="button" id="mobile-notifications-with-actions" class="btn-mobile">Try on mobile!</button>
+                <button type="button" id="mobile-notifications-with-actions" class="btn-mobile">Try with Webworkers!</button>
             </div>
+            <script>
+                (() => {
+                    const options = {
+                        actions: [
+                            {action: 'action-1', title: '1st action', icon: 'smile-blue.png'},
+                            {action: 'action-2', title: '2nd action', icon: 'smile-red.png'},
+                            {action: 'action-3', title: '3rd action', icon: 'smile.png'}
+                        ],
+                        icon: 'smile.png'
+                    };
+
+                    id('mobile-notifications-with-actions', () => {
+                        navigator.serviceWorker.register('sw-onnotificationclick.js').then((registration) => {
+                            registration.showNotification('Mobile - Notification with call to action buttons', options);
+                        });
+                    });
+                })();
+            </script>
         </section>
     </main>
 
 <script src="reveal-js/head.min.js"></script>
 <script src="reveal-js/reveal.min.js"></script>
 <script>
-
-    // Full list of configuration options available at:
-    // https://github.com/hakimel/reveal.js#configuration
     Reveal.initialize({
         controls: true,
         progress: true,
@@ -348,226 +553,6 @@ new Notification('Extended notification', {
             { src: 'reveal-js/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
             { src: 'reveal-js/zoom.js', async: true }
         ]
-    });
-
-</script>
-<script>
-    // DESKTOP
-    id('desktop-require-interaction', () => {
-        new Notification('Require interaction', {
-            body: 'This notification will never be auto hidden because it require your interaction',
-            badge: 'sword.png',
-            requireInteraction: true
-        });
-    });
-
-    id('desktop-show-notification-with-extra-data', () => {
-        var notification = new Notification('Notification with extra object data', {
-            body: 'This notification have extra data',
-            badge: 'sword.png',
-            icon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAApElEQVR42u3RAQ0AAAjDMO5fNCCDkC5z0HTVrisFCBABASIgQAQEiIAAAQJEQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAQECBAgAgJEQIAIyPcGFY7HnV2aPXoAAAAASUVORK5CYII=',
-            data: {
-                some: 'extra-data',
-                2: true,
-                array: ["x", true, 1]
-            }
-        });
-
-        console.log('show-notification-with-more-data', notification.data);
-    });
-
-    id('desktop-delayed-notification', () => {
-        setTimeout(() => {
-            new Notification('Delayed notification', {
-                body: 'This notification should be shown after 5 seconds!',
-                badge: 'sword.png',
-                icon: 'smile.png'
-            });
-        }, 5000);
-    });
-
-    id('desktop-notification-events', () => {
-        var notification = new Notification('Notification events', {
-            body: 'Remember to open console!',
-            badge: 'sword.png',
-            icon: 'smile.png'
-        });
-
-        notification.onclose = () => {
-            console.log('notification-events', 'onclose');
-        };
-
-        notification.onclick = function (event) {
-            console.log('notification-events', 'onclick');
-            event.target.close(); // because not every browser close notification after click on them
-        };
-
-        notification.onshow = () => {
-            console.log('notification-events', 'onshow');
-        };
-
-        notification.onerror = () => {
-            console.log('notification-events', 'onerror');
-        };
-    });
-
-    id('desktop-notification-vibration-sound', () => {
-        new Notification('Notification with vibration and custom sound', {
-            vibrate: [400, 300, 300, 800],
-            badge: 'sword.png',
-            body: 'Do you fill vibration?',
-            sound: 'sound.mp3'
-        });
-    });
-
-    id('desktop-many-notifications-without-tag', () => {
-        for (var i = 1; i < 12; i++) {
-            setTimeout(function (no) {
-                return () => {
-                    new Notification('Notification No. ' + no, {
-                        badge: 'sword.png',
-                        icon: 'smile-blue.png'
-                    });
-                }
-            }(i), 1000 * i);
-        }
-    });
-
-    id('desktop-many-notifications-with-tag', () => {
-        for (var i = 1; i < 30; i++) {
-            setTimeout(function (no) {
-                return () => {
-                    var group = (no % 2 == 0) ? 'A' : 'B';
-                    new Notification('Tag Notification No. ' + no, {
-                        tag: 'group-' + group,
-                        badge: 'sword.png',
-                        icon: group === 'A' ? 'smile-blue.png' : 'smile-red.png'
-                    });
-                }
-            }(i), 1000 * i);
-        }
-    });
-
-
-    /**
-     * MOBILE
-     */
-
-    id('mobile-require-interaction', () => {
-        navigator.serviceWorker.ready.then(function (registration) {
-            registration.showNotification('Mobile Require interaction', {
-                body: 'This notification will never be auto hidden because it require your interaction',
-                badge: 'sword.png',
-                requireInteraction: true
-            });
-        });
-    });
-
-    id('mobile-show-notification-with-extra-data', () => {
-        navigator.serviceWorker.ready.then(function (registration) {
-            registration.showNotification('Mobile - Notification with extra object data', {
-                body: 'This notification have extra data',
-                badge: 'sword.png',
-                icon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAApElEQVR42u3RAQ0AAAjDMO5fNCCDkC5z0HTVrisFCBABASIgQAQEiIAAAQJEQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAREQIAICBABASIgQAQECBAgAgJEQIAIyPcGFY7HnV2aPXoAAAAASUVORK5CYII=',
-                data: {
-                    some: 'extra-data',
-                    2: true,
-                    array: ["x", true, 1]
-                }
-            });
-        });
-
-        console.log('show-notification-with-more-data', notification.data);
-    });
-
-    id('mobile-delayed-notification', () => {
-        setTimeout(() => {
-            navigator.serviceWorker.ready.then(function (registration) {
-                registration.showNotification('Mobile - Delayed notification', {
-                    badge: 'sword.png'
-                });
-            });
-        }, 5000);
-    });
-
-    id('mobile-notification-events', () => {
-        navigator.serviceWorker.ready.then(function (registration) {
-            registration.showNotification('Mobile - Notification events', {
-                body: 'Remember to open console!',
-                badge: 'sword.png',
-                icon: 'smile.png',
-                onclose: () => {
-                    console.log('notification-events', 'onclose');
-                },
-                onclick: function (event) {
-                    console.log('notification-events', 'onclick');
-                    event.target.close(); // because not every browser close notification after click on them
-                },
-                onshow: () => {
-                    console.log('notification-events', 'onshow');
-                },
-                onerror: () => {
-                    console.log('notification-events', 'onerror');
-                }
-            });
-        });
-    });
-
-    id('mobile-notification-vibration-sound', () => {
-        navigator.serviceWorker.ready.then(function (registration) {
-            registration.showNotification('Mobile - Notification with vibration and custom sound', {
-                badge: 'sword.png',
-                vibrate: [400, 300, 300, 800],
-                body: 'Do you fill vibration?',
-                sound: 'sound.mp3'
-            });
-        });
-    });
-
-    id('mobile-many-notifications-without-tag', () => {
-        navigator.serviceWorker.ready.then(function (registration) {
-            for (var i = 1; i < 12; i++) {
-                setTimeout(function (no) {
-                    return () => {
-                        registration.showNotification('Mobile - Notification No. ' + no, {
-                            badge: 'sword.png',
-                            icon: 'smile-blue.png'
-                        });
-                    }
-                }(i), 1000 * i);
-            }
-        });
-    });
-
-    id('mobile-many-notifications-with-tag', () => {
-        navigator.serviceWorker.ready.then(function (registration) {
-            for (var i = 1; i < 30; i++) {
-                setTimeout(function (no) {
-                    return () => {
-                        var group = (no % 2 == 0) ? 'A' : 'B';
-                        registration.showNotification('Mobile - Tag Notification No. ' + no, {
-                            tag: 'group-' + group,
-                            badge: 'sword.png',
-                            icon: group === 'A' ? 'smile-blue.png' : 'smile-red.png'
-                        });
-                    }
-                }(i), 1000 * i);
-            }
-        });
-    });
-
-    id('mobile-notifications-with-actions', () => {
-        navigator.serviceWorker.ready.then(function (registration) {
-            registration.showNotification('Mobile - Notification with call to action buttons', {
-                badge: 'sword.png',
-                actions: [
-                    {action: 'action-1', title: '1st action', icon: 'smile-blue.png'},
-                    {action: 'action-2', title: '2nd action', icon: 'smile-red.png'},
-                    {action: 'action-3', title: '3rd action', icon: 'smile.png'}
-                ],
-                icon: 'smile.png'
-            });
-        });
     });
 </script>
 
