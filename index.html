@@ -7,72 +7,601 @@
 
     <title>Web Notification API showcase | Bartosz Bobin</title>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+
+    <link rel="stylesheet" href="http://lab.hakim.se/reveal-js/css/reveal.css">
+    <link rel="stylesheet" href="http://lab.hakim.se/reveal-js/css/theme/black.css" id="theme">
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="http://lab.hakim.se/reveal-js/lib/css/zenburn.css">
+    <style>
+        .btn {
+            display: inline-block;
+            padding: 6px 12px;
+            margin-bottom: 0;
+            font-size: 14px;
+            font-weight: normal;
+            line-height: 1.42857143;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            -ms-touch-action: manipulation;
+            touch-action: manipulation;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            background-image: none;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+        .btn:focus,
+        .btn:active:focus,
+        .btn.active:focus,
+        .btn.focus,
+        .btn:active.focus,
+        .btn.active.focus {
+            outline: 5px auto -webkit-focus-ring-color;
+            outline-offset: -2px;
+        }
+        .btn:hover,
+        .btn:focus,
+        .btn.focus {
+            color: #333;
+            text-decoration: none;
+        }
+        .btn:active,
+        .btn.active {
+            background-image: none;
+            outline: 0;
+            -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+            box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+        }
+        .btn.disabled,
+        .btn[disabled],
+        fieldset[disabled] .btn {
+            cursor: not-allowed;
+            filter: alpha(opacity=65);
+            -webkit-box-shadow: none;
+            box-shadow: none;
+            opacity: .65;
+        }
+        a.btn.disabled,
+        fieldset[disabled] a.btn {
+            pointer-events: none;
+        }
+        .btn-default {
+            color: #333;
+            background-color: #fff;
+            border-color: #ccc;
+        }
+        .btn-default:focus,
+        .btn-default.focus {
+            color: #333;
+            background-color: #e6e6e6;
+            border-color: #8c8c8c;
+        }
+        .btn-default:hover {
+            color: #333;
+            background-color: #e6e6e6;
+            border-color: #adadad;
+        }
+        .btn-default:active,
+        .btn-default.active,
+        .open > .dropdown-toggle.btn-default {
+            color: #333;
+            background-color: #e6e6e6;
+            border-color: #adadad;
+        }
+        .btn-default:active:hover,
+        .btn-default.active:hover,
+        .open > .dropdown-toggle.btn-default:hover,
+        .btn-default:active:focus,
+        .btn-default.active:focus,
+        .open > .dropdown-toggle.btn-default:focus,
+        .btn-default:active.focus,
+        .btn-default.active.focus,
+        .open > .dropdown-toggle.btn-default.focus {
+            color: #333;
+            background-color: #d4d4d4;
+            border-color: #8c8c8c;
+        }
+        .btn-default:active,
+        .btn-default.active,
+        .open > .dropdown-toggle.btn-default {
+            background-image: none;
+        }
+        .btn-default.disabled:hover,
+        .btn-default[disabled]:hover,
+        fieldset[disabled] .btn-default:hover,
+        .btn-default.disabled:focus,
+        .btn-default[disabled]:focus,
+        fieldset[disabled] .btn-default:focus,
+        .btn-default.disabled.focus,
+        .btn-default[disabled].focus,
+        fieldset[disabled] .btn-default.focus {
+            background-color: #fff;
+            border-color: #ccc;
+        }
+        .btn-default .badge {
+            color: #fff;
+            background-color: #333;
+        }
+        .btn-primary {
+            color: #fff;
+            background-color: #337ab7;
+            border-color: #2e6da4;
+        }
+        .btn-primary:focus,
+        .btn-primary.focus {
+            color: #fff;
+            background-color: #286090;
+            border-color: #122b40;
+        }
+        .btn-primary:hover {
+            color: #fff;
+            background-color: #286090;
+            border-color: #204d74;
+        }
+        .btn-primary:active,
+        .btn-primary.active,
+        .open > .dropdown-toggle.btn-primary {
+            color: #fff;
+            background-color: #286090;
+            border-color: #204d74;
+        }
+        .btn-primary:active:hover,
+        .btn-primary.active:hover,
+        .open > .dropdown-toggle.btn-primary:hover,
+        .btn-primary:active:focus,
+        .btn-primary.active:focus,
+        .open > .dropdown-toggle.btn-primary:focus,
+        .btn-primary:active.focus,
+        .btn-primary.active.focus,
+        .open > .dropdown-toggle.btn-primary.focus {
+            color: #fff;
+            background-color: #204d74;
+            border-color: #122b40;
+        }
+        .btn-primary:active,
+        .btn-primary.active,
+        .open > .dropdown-toggle.btn-primary {
+            background-image: none;
+        }
+        .btn-primary.disabled:hover,
+        .btn-primary[disabled]:hover,
+        fieldset[disabled] .btn-primary:hover,
+        .btn-primary.disabled:focus,
+        .btn-primary[disabled]:focus,
+        fieldset[disabled] .btn-primary:focus,
+        .btn-primary.disabled.focus,
+        .btn-primary[disabled].focus,
+        fieldset[disabled] .btn-primary.focus {
+            background-color: #337ab7;
+            border-color: #2e6da4;
+        }
+        .btn-primary .badge {
+            color: #337ab7;
+            background-color: #fff;
+        }
+        .btn-success {
+            color: #fff;
+            background-color: #5cb85c;
+            border-color: #4cae4c;
+        }
+        .btn-success:focus,
+        .btn-success.focus {
+            color: #fff;
+            background-color: #449d44;
+            border-color: #255625;
+        }
+        .btn-success:hover {
+            color: #fff;
+            background-color: #449d44;
+            border-color: #398439;
+        }
+        .btn-success:active,
+        .btn-success.active,
+        .open > .dropdown-toggle.btn-success {
+            color: #fff;
+            background-color: #449d44;
+            border-color: #398439;
+        }
+        .btn-success:active:hover,
+        .btn-success.active:hover,
+        .open > .dropdown-toggle.btn-success:hover,
+        .btn-success:active:focus,
+        .btn-success.active:focus,
+        .open > .dropdown-toggle.btn-success:focus,
+        .btn-success:active.focus,
+        .btn-success.active.focus,
+        .open > .dropdown-toggle.btn-success.focus {
+            color: #fff;
+            background-color: #398439;
+            border-color: #255625;
+        }
+        .btn-success:active,
+        .btn-success.active,
+        .open > .dropdown-toggle.btn-success {
+            background-image: none;
+        }
+        .btn-success.disabled:hover,
+        .btn-success[disabled]:hover,
+        fieldset[disabled] .btn-success:hover,
+        .btn-success.disabled:focus,
+        .btn-success[disabled]:focus,
+        fieldset[disabled] .btn-success:focus,
+        .btn-success.disabled.focus,
+        .btn-success[disabled].focus,
+        fieldset[disabled] .btn-success.focus {
+            background-color: #5cb85c;
+            border-color: #4cae4c;
+        }
+        .btn-success .badge {
+            color: #5cb85c;
+            background-color: #fff;
+        }
+        .btn-info {
+            color: #fff;
+            background-color: #5bc0de;
+            border-color: #46b8da;
+        }
+        .btn-info:focus,
+        .btn-info.focus {
+            color: #fff;
+            background-color: #31b0d5;
+            border-color: #1b6d85;
+        }
+        .btn-info:hover {
+            color: #fff;
+            background-color: #31b0d5;
+            border-color: #269abc;
+        }
+        .btn-info:active,
+        .btn-info.active,
+        .open > .dropdown-toggle.btn-info {
+            color: #fff;
+            background-color: #31b0d5;
+            border-color: #269abc;
+        }
+        .btn-info:active:hover,
+        .btn-info.active:hover,
+        .open > .dropdown-toggle.btn-info:hover,
+        .btn-info:active:focus,
+        .btn-info.active:focus,
+        .open > .dropdown-toggle.btn-info:focus,
+        .btn-info:active.focus,
+        .btn-info.active.focus,
+        .open > .dropdown-toggle.btn-info.focus {
+            color: #fff;
+            background-color: #269abc;
+            border-color: #1b6d85;
+        }
+        .btn-info:active,
+        .btn-info.active,
+        .open > .dropdown-toggle.btn-info {
+            background-image: none;
+        }
+        .btn-info.disabled:hover,
+        .btn-info[disabled]:hover,
+        fieldset[disabled] .btn-info:hover,
+        .btn-info.disabled:focus,
+        .btn-info[disabled]:focus,
+        fieldset[disabled] .btn-info:focus,
+        .btn-info.disabled.focus,
+        .btn-info[disabled].focus,
+        fieldset[disabled] .btn-info.focus {
+            background-color: #5bc0de;
+            border-color: #46b8da;
+        }
+        .btn-info .badge {
+            color: #5bc0de;
+            background-color: #fff;
+        }
+        .btn-warning {
+            color: #fff;
+            background-color: #f0ad4e;
+            border-color: #eea236;
+        }
+        .btn-warning:focus,
+        .btn-warning.focus {
+            color: #fff;
+            background-color: #ec971f;
+            border-color: #985f0d;
+        }
+        .btn-warning:hover {
+            color: #fff;
+            background-color: #ec971f;
+            border-color: #d58512;
+        }
+        .btn-warning:active,
+        .btn-warning.active,
+        .open > .dropdown-toggle.btn-warning {
+            color: #fff;
+            background-color: #ec971f;
+            border-color: #d58512;
+        }
+        .btn-warning:active:hover,
+        .btn-warning.active:hover,
+        .open > .dropdown-toggle.btn-warning:hover,
+        .btn-warning:active:focus,
+        .btn-warning.active:focus,
+        .open > .dropdown-toggle.btn-warning:focus,
+        .btn-warning:active.focus,
+        .btn-warning.active.focus,
+        .open > .dropdown-toggle.btn-warning.focus {
+            color: #fff;
+            background-color: #d58512;
+            border-color: #985f0d;
+        }
+        .btn-warning:active,
+        .btn-warning.active,
+        .open > .dropdown-toggle.btn-warning {
+            background-image: none;
+        }
+        .btn-warning.disabled:hover,
+        .btn-warning[disabled]:hover,
+        fieldset[disabled] .btn-warning:hover,
+        .btn-warning.disabled:focus,
+        .btn-warning[disabled]:focus,
+        fieldset[disabled] .btn-warning:focus,
+        .btn-warning.disabled.focus,
+        .btn-warning[disabled].focus,
+        fieldset[disabled] .btn-warning.focus {
+            background-color: #f0ad4e;
+            border-color: #eea236;
+        }
+        .btn-warning .badge {
+            color: #f0ad4e;
+            background-color: #fff;
+        }
+        .btn-danger {
+            color: #fff;
+            background-color: #d9534f;
+            border-color: #d43f3a;
+        }
+        .btn-danger:focus,
+        .btn-danger.focus {
+            color: #fff;
+            background-color: #c9302c;
+            border-color: #761c19;
+        }
+        .btn-danger:hover {
+            color: #fff;
+            background-color: #c9302c;
+            border-color: #ac2925;
+        }
+        .btn-danger:active,
+        .btn-danger.active,
+        .open > .dropdown-toggle.btn-danger {
+            color: #fff;
+            background-color: #c9302c;
+            border-color: #ac2925;
+        }
+        .btn-danger:active:hover,
+        .btn-danger.active:hover,
+        .open > .dropdown-toggle.btn-danger:hover,
+        .btn-danger:active:focus,
+        .btn-danger.active:focus,
+        .open > .dropdown-toggle.btn-danger:focus,
+        .btn-danger:active.focus,
+        .btn-danger.active.focus,
+        .open > .dropdown-toggle.btn-danger.focus {
+            color: #fff;
+            background-color: #ac2925;
+            border-color: #761c19;
+        }
+        .btn-danger:active,
+        .btn-danger.active,
+        .open > .dropdown-toggle.btn-danger {
+            background-image: none;
+        }
+        .btn-danger.disabled:hover,
+        .btn-danger[disabled]:hover,
+        fieldset[disabled] .btn-danger:hover,
+        .btn-danger.disabled:focus,
+        .btn-danger[disabled]:focus,
+        fieldset[disabled] .btn-danger:focus,
+        .btn-danger.disabled.focus,
+        .btn-danger[disabled].focus,
+        fieldset[disabled] .btn-danger.focus {
+            background-color: #d9534f;
+            border-color: #d43f3a;
+        }
+        .btn-danger .badge {
+            color: #d9534f;
+            background-color: #fff;
+        }
+        .btn-link {
+            font-weight: normal;
+            color: #337ab7;
+            border-radius: 0;
+        }
+        .btn-link,
+        .btn-link:active,
+        .btn-link.active,
+        .btn-link[disabled],
+        fieldset[disabled] .btn-link {
+            background-color: transparent;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+        }
+        .btn-link,
+        .btn-link:hover,
+        .btn-link:focus,
+        .btn-link:active {
+            border-color: transparent;
+        }
+        .btn-link:hover,
+        .btn-link:focus {
+            color: #23527c;
+            text-decoration: underline;
+            background-color: transparent;
+        }
+        .btn-link[disabled]:hover,
+        fieldset[disabled] .btn-link:hover,
+        .btn-link[disabled]:focus,
+        fieldset[disabled] .btn-link:focus {
+            color: #777;
+            text-decoration: none;
+        }
+        .btn-lg,
+        .btn-group-lg > .btn {
+            padding: 10px 16px;
+            font-size: 18px;
+            line-height: 1.3333333;
+            border-radius: 6px;
+        }
+        .btn-sm,
+        .btn-group-sm > .btn {
+            padding: 5px 10px;
+            font-size: 12px;
+            line-height: 1.5;
+            border-radius: 3px;
+        }
+        .btn-xs,
+        .btn-group-xs > .btn {
+            padding: 1px 5px;
+            font-size: 12px;
+            line-height: 1.5;
+            border-radius: 3px;
+        }
+        .btn-block {
+            display: block;
+            width: 100%;
+        }
+        .btn-block + .btn-block {
+            margin-top: 5px;
+        }
+        input[type="submit"].btn-block,
+        input[type="reset"].btn-block,
+        input[type="button"].btn-block {
+            width: 100%;
+        }
+    </style>
 </head>
-<body>
-<main class="container">
-    <header class="page-header">
-        <h1>Web Notification API showcase</h1>
-        <h3>Author Bartosz Bobin</h3>
-    </header>
-    <article>
-        <div class="clearfix form-group">
-            <div class="col-sm-8"><strong>Do I have permissions?</strong><br/>
+<body class="reveal">
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis arcu ullamcorper, imperdiet
-                    leo dignissim, sodales ipsum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
-                    posuere cubilia Curae; Nullam ac turpis ipsum. Vivamus nec eleifend ex. Etiam blandit tortor eget
-                    ante euismod interdum. Sed vitae urna a tellus ullamcorper placerat. Fusce eu tortor placerat,
-                    dapibus sem sed, laoreet elit. Suspendisse porttitor porttitor tortor, vitae condimentum nisi
-                    gravida vitae. Phasellus tempus augue ut tellus vestibulum, id tempus sapien sagittis. Nam
-                    vestibulum venenatis felis id tristique. Pellentesque eleifend rhoncus mi, congue sagittis diam
-                    pharetra sed. Vestibulum sodales purus ac pharetra dignissim. Praesent ultricies molestie
-                    tincidunt.</p>
-            </div>
-            <div class="col-sm-4">
-                <button type="button" id="do-i-have-permission" class="btn btn-info btn-block">Try me!</button>
-            </div>
+<main class="slides">
+    <section>
+        <h2>Web Notification API</h2>
+        <h4> examples</h4>
+        <h6>Author @BartoszBobin</h6>
+    </section>
+    <section>
+        <div class="col-sm-8">
+<pre><code class="hljs">
+new Notification('Notification Title', {
+                  body: 'This notification have additional text and icon',
+                 badge: 'sword.png',
+                  icon: 'smile.png',
+             timestamp: Date.now(),
+                  data: {},
+    requireInteraction: true,
+               vibrate: [400, 300, 300, 800],
+                 badge: 'sword.png',
+                  body: 'Do you fill vibration?',
+                   tag: 'group-A',
+                 sound: 'sound.mp3'
+});
+</code></pre>
         </div>
-        <div class="clearfix form-group">
-            <div class="col-sm-8"><strong>Ask me about permissions</strong><br/>
-                <p>xxxxxxxxxxxxx</p>
-            </div>
-            <div class="col-sm-4">
-                <button type="button" id="ask-me-about-permission" class="btn btn-info btn-block">Try me!</button>
-            </div>
+        <div>
+
         </div>
 
-        <p>&nbsp;</p>
-        <div class="clearfix form-group">
-            <div class="col-sm-8"><strong>Say Hello!</strong><br/>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis arcu ullamcorper, imperdiet
-                    leo dignissim, sodales ipsum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
-                    posuere cubilia Curae; Nullam ac turpis ipsum. Vivamus nec eleifend ex. Etiam blandit tortor eget
-                    ante euismod interdum. Sed vitae urna a tellus ullamcorper placerat. Fusce eu tortor placerat,
-                    dapibus sem sed, laoreet elit. Suspendisse porttitor porttitor tortor, vitae condimentum nisi
-                    gravida vitae. Phasellus tempus augue ut tellus vestibulum, id tempus sapien sagittis. Nam
-                    vestibulum venenatis felis id tristique. Pellentesque eleifend rhoncus mi, congue sagittis diam
-                    pharetra sed. Vestibulum sodales purus ac pharetra dignissim. Praesent ultricies molestie
-                    tincidunt.</p>
+    </section>
+ <!--https://groups.google.com/a/chromium.org/forum/#!topic/blink-dev/BygptYClroM-->
+
+        <section>
+            <div class="col-sm-8">
+                <h3>Do I have permissions?</h3>
+                <p>We can easy check if user allow notification for our website by checking property:</p>
+                <pre><code class="hljs">Notification.permission;</code></pre>
+                <button type="button" id="do-i-have-permission" class="btn btn-info btn-lg">Try me!</button>
+                <p>Possible values:</p>
+                <ul class="list-unstyled">
+                    <li><em>default</em> - there is no decision yet</li>
+                    <li><em>granted</em> - user allow notification</li>
+                    <li><em>denied</em> - user don't want to see our notification</li>
+                </ul>
             </div>
-            <div class="col-sm-4">
+            <script>
+                id('do-i-have-permission', () => {
+                    window.alert(Notification.permission);
+                });
+            </script>
+        </section>
+
+        <section>
+            <div class="col-sm-8"><h3>Ask me about permissions</h3>
+                <p>Before we show any notification to our user we need to ask him about permission:</p>
+                <pre><code class="hljs">
+Notification.requestPermission().then((result) => { });
+                </code></pre>
+                <button type="button" id="ask-me-about-permission" class="btn btn-info btn-lg">Try me!</button>
+
+                <p><h3>!important: </h3>Web browser will ask user about permission to show notification.
+                    When user will take decision eg.: denied, web browser will not ask him again.</p>
+            </div>
+            <script>
+                id('ask-me-about-permission', () => {
+                    Notification.requestPermission().then((result) => {
+                        window.alert('Notification Request : ' + result);
+                    });
+                });
+            </script>
+        </section>
+
+        <section>
+            <div class="col-sm-8"><h3>Say Hello!</h3>
+                <p>Let's try simple notification</p>
+                <pre><code class="hljs">
+new Notification('Hi desktop user!', {
+    badge: 'sword.png',
+    icon: 'smile.png',
+    image: 'smile-blue.png'
+});
+                </code></pre>
+
+            </div>
+            <div>
                 <button type="button" id="desktop-say-hello" class="btn btn-info">Try on desktop!</button>
                 <button type="button" id="mobile-say-hello" class="btn btn-warning">Try on mobile!</button>
             </div>
-        </div>
-        <div class="clearfix form-group">
-            <div class="col-sm-8"><strong>Tell me more!</strong><br/>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis arcu ullamcorper, imperdiet
-                    leo dignissim, sodales ipsum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
-                    posuere cubilia Curae; Nullam ac turpis ipsum. Vivamus nec eleifend ex. Etiam blandit tortor eget
-                    ante euismod interdum. Sed vitae urna a tellus ullamcorper placerat. Fusce eu tortor placerat,
-                    dapibus sem sed, laoreet elit. Suspendisse porttitor porttitor tortor, vitae condimentum nisi
-                    gravida vitae. Phasellus tempus augue ut tellus vestibulum, id tempus sapien sagittis. Nam
-                    vestibulum venenatis felis id tristique. Pellentesque eleifend rhoncus mi, congue sagittis diam
-                    pharetra sed. Vestibulum sodales purus ac pharetra dignissim. Praesent ultricies molestie
-                    tincidunt.</p>
+            <script>
+                id('desktop-say-hello', () => {
+                    new Notification('Hi desktop user!', {
+                        badge: 'sword.png',
+                        icon: 'smile.png',
+                        image: 'smile-blue.png'
+                    });
+                });
+
+                id('mobile-say-hello', () => {
+                    navigator.serviceWorker.ready.then(function (registration) {
+                        registration.showNotification('Hi mobile user!', {
+                            badge: 'sword.png',
+                            icon: 'smile.png',
+                            image: 'smile-blue.png'
+                        });
+                    });
+                });
+            </script>
+        </section>
+
+        <section>
+            <div class="col-sm-8"><h3>More extended example!</h3>
+                <p>Let's add body text and icon to our notification...</p>
+                <pre><code class="hljs">
+new Notification('Extended notification', {
+    body: 'This notification have additional text and icon',
+    badge: 'sword.png',
+    icon: 'smile.png',
+    timestamp: Date.now()
+});
+                </code></pre>
             </div>
-            <div class="col-sm-4">
+            <div>
                 <button type="button" id="desktop-show-notification-with-more-options" class="btn btn-info">Try on
                     desktop!
                 </button>
@@ -80,9 +609,31 @@
                     mobile!
                 </button>
             </div>
-        </div>
-        <div class="clearfix form-group">
-            <div class="col-sm-8"><strong>With extra data and base64 icon</strong><br/>
+            <script>
+                id('desktop-show-notification-with-more-options', () => {
+                    new Notification('Extended notification', {
+                        body: 'This notification have additional text and icon',
+                        badge: 'sword.png',
+                        icon: 'smile.png',
+                        timestamp: Date.now()
+                    });
+                });
+
+                id('mobile-show-notification-with-more-options', () => {
+                    navigator.serviceWorker.ready.then(function (registration) {
+                        registration.showNotification('Extended notification', {
+                            body: 'This notification have additional text and icon',
+                            badge: 'sword.png',
+                            icon: 'smile.png',
+                            timestamp: Date.now()
+                        });
+                    });
+                });
+            </script>
+        </section>
+
+        <section>
+            <div class="col-sm-8"><h3>With extra data and base64 icon</h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis arcu ullamcorper, imperdiet
                     leo dignissim, sodales ipsum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
                     posuere cubilia Curae; Nullam ac turpis ipsum. Vivamus nec eleifend ex. Etiam blandit tortor eget
@@ -93,7 +644,7 @@
                     pharetra sed. Vestibulum sodales purus ac pharetra dignissim. Praesent ultricies molestie
                     tincidunt.</p>
             </div>
-            <div class="col-sm-4">
+            <div>
                 <button type="button" id="desktop-show-notification-with-extra-data" class="btn btn-info">Try on
                     desktop!
                 </button>
@@ -101,9 +652,10 @@
                     mobile!
                 </button>
             </div>
-        </div>
-        <div class="clearfix form-group">
-            <div class="col-sm-8"><strong>Delay notification!</strong><br/>
+        </section>
+
+        <section>
+            <div class="col-sm-8"><h3>Delay notification!</h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis arcu ullamcorper, imperdiet
                     leo dignissim, sodales ipsum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
                     posuere cubilia Curae; Nullam ac turpis ipsum. Vivamus nec eleifend ex. Etiam blandit tortor eget
@@ -114,13 +666,14 @@
                     pharetra sed. Vestibulum sodales purus ac pharetra dignissim. Praesent ultricies molestie
                     tincidunt.</p>
             </div>
-            <div class="col-sm-4">
+            <div>
                 <button type="button" id="desktop-delayed-notification" class="btn btn-info">Try on desktop!</button>
                 <button type="button" id="mobile-delayed-notification" class="btn btn-warning">Try on mobile!</button>
             </div>
-        </div>
-        <div class="clearfix form-group">
-            <div class="col-sm-8"><strong>Require interaction</strong><br/>
+        </section>
+
+        <section>
+            <div class="col-sm-8"><h3>Require interaction</h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis arcu ullamcorper, imperdiet
                     leo dignissim, sodales ipsum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
                     posuere cubilia Curae; Nullam ac turpis ipsum. Vivamus nec eleifend ex. Etiam blandit tortor eget
@@ -131,14 +684,14 @@
                     pharetra sed. Vestibulum sodales purus ac pharetra dignissim. Praesent ultricies molestie
                     tincidunt.</p>
             </div>
-            <div class="col-sm-4">
+            <div>
                 <button type="button" id="desktop-require-interaction" class="btn btn-info">Try on desktop!</button>
                 <button type="button" id="mobile-require-interaction" class="btn btn-warning">Try on mobile!</button>
             </div>
-        </div>
-        <p>&nbsp;</p>
-        <div class="clearfix form-group">
-            <div class="col-sm-8"><strong>Notification events</strong><br/>
+        </section>
+
+        <section>
+            <div class="col-sm-8"><h3>Notification events</h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis arcu ullamcorper, imperdiet
                     leo dignissim, sodales ipsum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
                     posuere cubilia Curae; Nullam ac turpis ipsum. Vivamus nec eleifend ex. Etiam blandit tortor eget
@@ -149,13 +702,14 @@
                     pharetra sed. Vestibulum sodales purus ac pharetra dignissim. Praesent ultricies molestie
                     tincidunt.</p>
             </div>
-            <div class="col-sm-4">
+            <div>
                 <button type="button" id="desktop-notification-events" class="btn btn-info">Try on desktop!</button>
                 <button type="button" id="mobile-notification-events" class="btn btn-warning">Try on mobile!</button>
             </div>
-        </div>
-        <div class="clearfix form-group">
-            <div class="col-sm-8"><strong>Notification with vibration and custom sound</strong><br/>
+        </section>
+
+        <section>
+            <div class="col-sm-8"><h3>Notification with vibration and custom sound</h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis arcu ullamcorper, imperdiet
                     leo dignissim, sodales ipsum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
                     posuere cubilia Curae; Nullam ac turpis ipsum. Vivamus nec eleifend ex. Etiam blandit tortor eget
@@ -166,17 +720,17 @@
                     pharetra sed. Vestibulum sodales purus ac pharetra dignissim. Praesent ultricies molestie
                     tincidunt.</p>
             </div>
-            <div class="col-sm-4">
+            <div>
                 <button type="button" id="desktop-notification-vibration-sound" class="btn btn-info">Try on desktop!
                 </button>
                 <button type="button" id="mobile-notification-vibration-sound" class="btn btn-warning">Try on mobile!
                 </button>
             </div>
-        </div>
+        </section>
 
-        <h3>Many notifications</h3>
-        <div class="clearfix form-group">
-            <div class="col-sm-8"><strong>without tagging</strong><br/>
+        <section>
+            <h3>Many notifications</h3>
+            <div class="col-sm-8"><h3>without tagging</h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis arcu ullamcorper, imperdiet
                     leo dignissim, sodales ipsum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
                     posuere cubilia Curae; Nullam ac turpis ipsum. Vivamus nec eleifend ex. Etiam blandit tortor eget
@@ -187,16 +741,17 @@
                     pharetra sed. Vestibulum sodales purus ac pharetra dignissim. Praesent ultricies molestie
                     tincidunt.</p>
             </div>
-            <div class="col-sm-4">
+            <div>
                 <button type="button" id="desktop-many-notifications-without-tag" class="btn btn-info">Try on desktop!
                 </button>
                 <button type="button" id="mobile-many-notifications-without-tag" class="btn btn-warning">Try on
                     mobile!
                 </button>
             </div>
-        </div>
-        <div class="clearfix form-group">
-            <div class="col-sm-8"><strong>with tagging</strong><br/>
+        </section>
+
+        <section>
+            <div class="col-sm-8"><h3>with tagging</h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis arcu ullamcorper, imperdiet
                     leo dignissim, sodales ipsum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
                     posuere cubilia Curae; Nullam ac turpis ipsum. Vivamus nec eleifend ex. Etiam blandit tortor eget
@@ -207,16 +762,16 @@
                     pharetra sed. Vestibulum sodales purus ac pharetra dignissim. Praesent ultricies molestie
                     tincidunt.</p>
             </div>
-            <div class="col-sm-4">
+            <div>
                 <button type="button" id="desktop-many-notifications-with-tag" class="btn btn-info">Try on desktop!
                 </button>
                 <button type="button" id="mobile-many-notifications-with-tag" class="btn btn-warning">Try on mobile!
                 </button>
             </div>
-        </div>
-        <p>&nbsp;</p>
-        <div class="clearfix form-group">
-            <div class="col-sm-8"><strong>Custom actions</strong><br/>
+        </section>
+
+        <section>
+            <div class="col-sm-8"><h3>Custom actions</h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas iaculis arcu ullamcorper, imperdiet
                     leo dignissim, sodales ipsum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
                     posuere cubilia Curae; Nullam ac turpis ipsum. Vivamus nec eleifend ex. Etiam blandit tortor eget
@@ -227,33 +782,35 @@
                     pharetra sed. Vestibulum sodales purus ac pharetra dignissim. Praesent ultricies molestie
                     tincidunt.</p>
             </div>
-            <div class="col-sm-4">
+            <div>
                 <button type="button" id="mobile-notifications-with-actions" class="btn btn-warning">Try on mobile!</button>
             </div>
-        </div>
-    </article>
-</main>
+        </section>
+    </main>
 
+<script src="http://lab.hakim.se/reveal-js/lib/js/head.min.js"></script>
+<script src="http://lab.hakim.se/reveal-js/js/reveal.js"></script>
 <script>
-    // https://groups.google.com/a/chromium.org/forum/#!topic/blink-dev/BygptYClroM
-    id('do-i-have-permission', function () {
-        window.alert(Notification.permission);
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'zoom', // none/fade/slide/convex/concave/zoom,
+        dependencies: [
+            { src: 'http://lab.hakim.se/reveal-js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+            { src: 'http://lab.hakim.se/reveal-js/plugin/zoom-js/zoom.js', async: true }
+        ]
     });
 
-    id('ask-me-about-permission', function () {
-        Notification.requestPermission().then(function (result) {
-            window.alert('Notification Request : ' + result);
-        });
-    });
-
+</script>
+<script>
     // DESKTOP
-    id('desktop-say-hello', function () {
-        new Notification('Hi there!', {
-            badge: 'sword.png'
-        });
-    });
-
-    id('desktop-require-interaction', function () {
+    id('desktop-require-interaction', () => {
         new Notification('Require interaction', {
             body: 'This notification will never be auto hidden because it require your interaction',
             badge: 'sword.png',
@@ -261,16 +818,7 @@
         });
     });
 
-    id('desktop-show-notification-with-more-options', function () {
-        new Notification('Extended notification', {
-            body: 'This notification have additional text and icon',
-            badge: 'sword.png',
-            icon: 'smile.png',
-            timestamp: Date.now()
-        })
-    });
-
-    id('desktop-show-notification-with-extra-data', function () {
+    id('desktop-show-notification-with-extra-data', () => {
         var notification = new Notification('Notification with extra object data', {
             body: 'This notification have extra data',
             badge: 'sword.png',
@@ -285,8 +833,8 @@
         console.log('show-notification-with-more-data', notification.data);
     });
 
-    id('desktop-delayed-notification', function () {
-        setTimeout(function () {
+    id('desktop-delayed-notification', () => {
+        setTimeout(() => {
             new Notification('Delayed notification', {
                 body: 'This notification should be shown after 5 seconds!',
                 badge: 'sword.png',
@@ -295,14 +843,14 @@
         }, 5000);
     });
 
-    id('desktop-notification-events', function () {
+    id('desktop-notification-events', () => {
         var notification = new Notification('Notification events', {
             body: 'Remember to open console!',
             badge: 'sword.png',
             icon: 'smile.png'
         });
 
-        notification.onclose = function () {
+        notification.onclose = () => {
             console.log('notification-events', 'onclose');
         };
 
@@ -311,16 +859,16 @@
             event.target.close(); // because not every browser close notification after click on them
         };
 
-        notification.onshow = function () {
+        notification.onshow = () => {
             console.log('notification-events', 'onshow');
         };
 
-        notification.onerror = function () {
+        notification.onerror = () => {
             console.log('notification-events', 'onerror');
         };
     });
 
-    id('desktop-notification-vibration-sound', function () {
+    id('desktop-notification-vibration-sound', () => {
         new Notification('Notification with vibration and custom sound', {
             vibrate: [400, 300, 300, 800],
             badge: 'sword.png',
@@ -329,10 +877,10 @@
         });
     });
 
-    id('desktop-many-notifications-without-tag', function () {
+    id('desktop-many-notifications-without-tag', () => {
         for (var i = 1; i < 12; i++) {
             setTimeout(function (no) {
-                return function () {
+                return () => {
                     new Notification('Notification No. ' + no, {
                         badge: 'sword.png',
                         icon: 'smile-blue.png'
@@ -342,10 +890,10 @@
         }
     });
 
-    id('desktop-many-notifications-with-tag', function () {
+    id('desktop-many-notifications-with-tag', () => {
         for (var i = 1; i < 30; i++) {
             setTimeout(function (no) {
-                return function () {
+                return () => {
                     var group = (no % 2 == 0) ? 'A' : 'B';
                     new Notification('Tag Notification No. ' + no, {
                         tag: 'group-' + group,
@@ -357,18 +905,13 @@
         }
     });
 
-    // MOBILE
+
+    /**
+     * MOBILE
+     */
     navigator.serviceWorker.register('sw.js');
 
-    id('mobile-say-hello', function () {
-        navigator.serviceWorker.ready.then(function (registration) {
-            registration.showNotification('Mobile hi there!', {
-                badge: 'sword.png'
-            });
-        });
-    });
-
-    id('mobile-require-interaction', function () {
+    id('mobile-require-interaction', () => {
         navigator.serviceWorker.ready.then(function (registration) {
             registration.showNotification('Mobile Require interaction', {
                 body: 'This notification will never be auto hidden because it require your interaction',
@@ -378,18 +921,7 @@
         });
     });
 
-    id('mobile-show-notification-with-more-options', function () {
-        navigator.serviceWorker.ready.then(function (registration) {
-            registration.showNotification('Extended notification', {
-                body: 'This notification have additional text and icon',
-                badge: 'sword.png',
-                icon: 'smile.png',
-                timestamp: Date.now()
-            });
-        });
-    });
-
-    id('mobile-show-notification-with-extra-data', function () {
+    id('mobile-show-notification-with-extra-data', () => {
         navigator.serviceWorker.ready.then(function (registration) {
             registration.showNotification('Mobile - Notification with extra object data', {
                 body: 'This notification have extra data',
@@ -406,8 +938,8 @@
         console.log('show-notification-with-more-data', notification.data);
     });
 
-    id('mobile-delayed-notification', function () {
-        setTimeout(function () {
+    id('mobile-delayed-notification', () => {
+        setTimeout(() => {
             navigator.serviceWorker.ready.then(function (registration) {
                 registration.showNotification('Mobile - Delayed notification', {
                     badge: 'sword.png'
@@ -416,30 +948,30 @@
         }, 5000);
     });
 
-    id('mobile-notification-events', function () {
+    id('mobile-notification-events', () => {
         navigator.serviceWorker.ready.then(function (registration) {
             registration.showNotification('Mobile - Notification events', {
                 body: 'Remember to open console!',
                 badge: 'sword.png',
                 icon: 'smile.png',
-                onclose: function () {
+                onclose: () => {
                     console.log('notification-events', 'onclose');
                 },
                 onclick: function (event) {
                     console.log('notification-events', 'onclick');
                     event.target.close(); // because not every browser close notification after click on them
                 },
-                onshow: function () {
+                onshow: () => {
                     console.log('notification-events', 'onshow');
                 },
-                onerror: function () {
+                onerror: () => {
                     console.log('notification-events', 'onerror');
                 }
             });
         });
     });
 
-    id('mobile-notification-vibration-sound', function () {
+    id('mobile-notification-vibration-sound', () => {
         navigator.serviceWorker.ready.then(function (registration) {
             registration.showNotification('Mobile - Notification with vibration and custom sound', {
                 badge: 'sword.png',
@@ -450,11 +982,11 @@
         });
     });
 
-    id('mobile-many-notifications-without-tag', function () {
+    id('mobile-many-notifications-without-tag', () => {
         navigator.serviceWorker.ready.then(function (registration) {
             for (var i = 1; i < 12; i++) {
                 setTimeout(function (no) {
-                    return function () {
+                    return () => {
                         registration.showNotification('Mobile - Notification No. ' + no, {
                             badge: 'sword.png',
                             icon: 'smile-blue.png'
@@ -465,11 +997,11 @@
         });
     });
 
-    id('mobile-many-notifications-with-tag', function () {
+    id('mobile-many-notifications-with-tag', () => {
         navigator.serviceWorker.ready.then(function (registration) {
             for (var i = 1; i < 30; i++) {
                 setTimeout(function (no) {
-                    return function () {
+                    return () => {
                         var group = (no % 2 == 0) ? 'A' : 'B';
                         registration.showNotification('Mobile - Tag Notification No. ' + no, {
                             tag: 'group-' + group,
@@ -482,7 +1014,7 @@
         });
     });
 
-    id('mobile-notifications-with-actions', function () {
+    id('mobile-notifications-with-actions', () => {
         navigator.serviceWorker.ready.then(function (registration) {
             registration.showNotification('Mobile - Notification with call to action buttons', {
                 badge: 'sword.png',
