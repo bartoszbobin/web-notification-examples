@@ -29,9 +29,86 @@
         <h4> examples</h4>
         <h6>Author @BartoszBobin</h6>
     </section>
+ <!--https://groups.google.com/a/chromium.org/forum/#!topic/blink-dev/BygptYClroM-->
+
+
     <section>
-        <div class="col-sm-8">
-<pre><code class="hljs">
+        <h3>What is Web Notification?</h3>
+        <div>
+            <button type="button" id="example" class="btn-desktop">Let's check!</button>
+        </div>
+        <script>
+            id('example', () => {
+                Notification.requestPermission().then(() => {
+                    new Notification('Hello World!');
+                });
+            });
+        </script>
+    </section>
+
+    <section>
+            <h3>Browser support</h3>
+            <p>Notification API is available in</p>
+            <table  >
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Desktop</th>
+                        <th>Mobile</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>Chrome</th>
+                        <th>&#10003;</th>
+                        <th>&#10003;</th>
+                    </tr>
+                    <tr>
+                        <th>Firefox</th>
+                        <th>&#10003;</th>
+                        <th>&#10003;</th>
+                    </tr>
+                    <tr>
+                        <th>Edge</th>
+                        <th>&#10003;</th>
+                        <th>-</th>
+                    </tr>
+                    <tr>
+                        <th>Safari</th>
+                        <th>&#10003;</th>
+                        <th>-</th>
+                    </tr>
+                    <tr>
+                        <th>IE11</th>
+                        <th>&times;</th>
+                        <th>&times;</th>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+    <section>
+        <h3>How to use it?</h3>
+        <p>with Notification object</p>
+        <pre><code class="hljs">new Notification('Notification Title', options);</code></pre>
+        <small><p>* Doesn't work on mobile Chrome</p></small>
+
+        <p>with Webworkers</p>
+        <pre><code class="hljs">navigator.serviceWorker.register('sw.js', options);
+
+navigator.serviceWorker.ready.then((registration) => {
+    registration.showNotification('Notification Title');
+});</code></pre>
+        <small>
+            <p>* Doesn't work on Edge</p>
+            <p>** Works only over localhost or HTTPS</p>
+        </small>
+    </section>
+
+
+    <section>
+        <h3>Notification API</h3>
+        <pre><code class="hljs">
 new Notification('Notification Title', {
                   body: 'This notification have additional text and icon',
                   icon: 'smile.png',
@@ -42,27 +119,20 @@ new Notification('Notification Title', {
                  sound: 'sound.mp3'
 });
 </code></pre>
-        </div>
-        <div>
-
-        </div>
-
     </section>
- <!--https://groups.google.com/a/chromium.org/forum/#!topic/blink-dev/BygptYClroM-->
+
 
         <section>
-            <div class="col-sm-8">
-                <h3>Do I have permissions?</h3>
-                <p>We can easy check if user allow notification for our website by checking property:</p>
-                <pre><code class="hljs">Notification.permission;</code></pre>
-                <button type="button" id="do-i-have-permission" class="btn-desktop">Try me!</button>
-                <p>Possible values:</p>
-                <ul class="list-unstyled">
-                    <li><em>default</em> - there is no decision yet</li>
-                    <li><em>granted</em> - user allow notification</li>
-                    <li><em>denied</em> - user don't want to see our notification</li>
-                </ul>
-            </div>
+            <h3>Do I have permissions?</h3>
+            <p>We can easy check if user allow notification for our website by checking property:</p>
+            <pre><code class="hljs">Notification.permission;</code></pre>
+            <button type="button" id="do-i-have-permission" class="btn-desktop">Try me!</button>
+            <p>Possible values:</p>
+            <ul class="list-unstyled">
+                <li><em>default</em> - there is no decision yet</li>
+                <li><em>granted</em> - user allow notification</li>
+                <li><em>denied</em> - user don't want to see our notification</li>
+            </ul>
             <script>
                 id('do-i-have-permission', () => {
                     window.alert(Notification.permission);
@@ -537,6 +607,20 @@ notification.onclick = function (event) {
                 })();
             </script>
         </section>
+
+    <section>
+        <h3>How to detect support?</h3>
+        <p>We should prefer Service Workers over Notification instance - they seems to be more powerful</p>
+        <pre><code class="hljs">
+if ('serviceWorker' in navigator && 'Notification' in window) {
+    // use serviceWorkers
+} else if ('Notification' in window) {
+    // use new Notification()
+} else {
+    // no support for Notification
+}
+        </code></pre>
+    </section>
     </main>
 
 <script src="reveal-js/head.min.js"></script>
